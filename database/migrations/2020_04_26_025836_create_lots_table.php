@@ -15,6 +15,7 @@ class CreateLotsTable extends Migration
     {
         Schema::create('lots', function (Blueprint $table) {
             $table->id();
+            $table->integer('number');
             $table->foreignId('client_id');
             $table->integer('isDelivered');
         });

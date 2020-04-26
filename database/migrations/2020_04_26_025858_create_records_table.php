@@ -15,13 +15,7 @@ class CreateRecordsTable extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('package_id');
-            $table->foreignId('old_rack_letter');
-            $table->foreignId('old_rack_pos');
-            $table->foreignId('new_rack_letter');
-            $table->foreignId('new_rack_pos');
-            $table->timestamp('date_modified');
+            $table->timestamps();
         });
     }
 
