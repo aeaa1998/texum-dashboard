@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\CreateUsersTable;
 use App\CreateWorkersTable;
-use Illuminate\Support\Facades\DB;
-
-
+use App\Models\Worker;
+use App\Models\User;
 class AuthController extends Controller
 {
-    public function userRegister(Request $request)
+    public function register(Request $request)
     {
         $first_name = $request->input('first_name');
         $last_name = $request->input('last_name');
@@ -18,16 +18,29 @@ class AuthController extends Controller
         $password = $request->input('password');
         $timestamp = now();
 
-        DB::table('users')->insert(
+        User::insert(
             ['id' => null, 'email' => $email, 'password' => $password, 'created_at' => $timestamp]
         );
 
         $userID = DB::table('users')->select('id')->where('email',$email)->get();
 
-        DB::table('workers')->insert(
+        Worker::insert(
             ['id' => null, 'name' => $first_name, 'last_name' => $last_name, 'user_id' => $userID]
         );
 
         return response()->json(["User Registered!", 200]);
+    }
+
+    public function login(Request $request)
+    {
+        $userCredentials = $request->only('email','password');
+
+        if (Auth::attempt($userCredentials))
+        {
+            return response()->json(["Authenticated", 200]);
+        }
+        else {
+            return response()->json(["Invalid Credentials", 411]);
+        }
     }
 }
