@@ -5,39 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\CreateUsersTable;
 use App\CreateWorkersTable;
+use Illuminate\Support\Facades\DB;
 
 
 class AuthController extends Controller
 {
-    public function userRegister() 
+    public function userRegister(Request $request)
     {
-    }
+        $first_name = $request->input('first_name');
+        $last_name = $request->input('last_name');
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $timestamp = now();
 
-    public function userLogin($name, $password) 
-    {
-        $flag1 = false;
-        $flag2 = false;
+        DB::table('users')->insert(
+            ['id' => null, 'email' => $email, 'password' => $password, 'created_at' => $timestamp]
+        );
 
-        $dbNames = DB::table('workers')->get('name');
-        $dbPasswords = DB::table('users')->get('password');
+        $userID = DB::table('users')->select('id')->where('email',$email)->get();
 
-        if(in_array($name, $dbNames)) {
-            $flag1 = true;
-        }
-        if(in_array($password, $dbPasswords)) {
-            $flag2 = true;
-        }
+        DB::table('workers')->insert(
+            ['id' => null, 'name' => $first_name, 'last_name' => $last_name, 'user_id' => $userID]
+        );
 
-        if($flag1 == true && $flag2 == true) {
-            return true;
-        }
-        else {
-            showAlert("Incorrect Name or Password");
-        }
-    }
-
-    public function showAlert($message) 
-    {
-        echo $message;
+        return response()->json(["User Registered!", 200]);
     }
 }
