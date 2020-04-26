@@ -4,5 +4,19 @@
 // Variables
 @import 'variables';
 
+@import '~vuetify/dist/vuetify.min.css';
+
+// Sizes
+@import 'sizes';
+
+// background-images
+@import 'background-images';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
+
+.text-white {
+    color: white;
+}
