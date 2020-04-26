@@ -16,9 +16,9 @@ class CreatePackagesTable extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('bar_code');
-            $table->foreignId('client_id');
-            $table->foreignId('lot_id');
-            $table->foreignId('status_id');
+            $table->foreignId('client_id')->constrained();
+            $table->foreignId('lot_id')->constrained();
+            $table->foreignId('status_id')->constrained();
         });
     }
 
