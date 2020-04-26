@@ -16,9 +16,9 @@ class CreateLockersTable extends Migration
         Schema::create('lockers', function (Blueprint $table) {
             $table->id();
             $table->string('letter');
-            $table->string('letter');
-            $table->integer('level');
-
+            $table->integer('column');
+            $table->integer('row');
+            $table->integer('capacity');
         });
     }
 

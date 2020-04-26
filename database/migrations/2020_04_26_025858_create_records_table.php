@@ -15,6 +15,11 @@ class CreateRecordsTable extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('package_id')->constrained();
+            $table->unsignedBigInteger('old_locker');
+            $table->unsignedBigInteger('new_locker');
+            $table->foreign('old_locker')->references('id')->on('lockers');
+            $table->foreign('new_locker')->references('id')->on('lockers');
             $table->timestamps();
         });
     }

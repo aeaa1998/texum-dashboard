@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLotsTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateLotsTable extends Migration
      */
     public function up()
     {
-        Schema::create('lots', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->integer('number');
-            $table->foreignId('client_id')->constrained();
-            $table->integer('is_delivered');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateLotsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lots');
+        Schema::dropIfExists('roles');
     }
 }
