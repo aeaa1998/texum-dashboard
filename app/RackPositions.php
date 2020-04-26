@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Worker extends Model
+class RackPositions extends Model
 {
     //
 }
