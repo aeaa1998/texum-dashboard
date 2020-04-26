@@ -18,6 +18,7 @@ class CreateLotsTable extends Migration
             $table->integer('number');
             $table->foreignId('client_id')->constrained();
             $table->integer('is_delivered');
+            $table->date('cut_date');
             $table->timestamps();
         });
     }
