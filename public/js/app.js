@@ -1998,13 +1998,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       first_name: "",
       last_name: "",
       email: "",
-      password: ""
+      password: "",
+      password_confirmation: ""
     };
   }
 });
@@ -37937,27 +37941,40 @@ var render = function() {
                           })
                         ],
                         1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        {
+                          staticStyle: {
+                            display: "flex",
+                            "justify-content": "flex-end"
+                          },
+                          attrs: { cols: "6" }
+                        },
+                        [
+                          _c(
+                            "v-card-actions",
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    text: "",
+                                    color: "deep-purple accent-4",
+                                    href: "/"
+                                  }
+                                },
+                                [_vm._v(" Crear Cuenta ")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
                       )
                     ],
                     1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-actions",
-                [
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        text: "",
-                        color: "deep-purple accent-4",
-                        href: "/"
-                      }
-                    },
-                    [_vm._v(" Crear Cuenta ")]
                   )
                 ],
                 1

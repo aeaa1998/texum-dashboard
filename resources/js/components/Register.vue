@@ -31,11 +31,14 @@
                         <v-col cols="6">
                             <v-text-field v-model="password_confirmation" label="Confirmar contraseña" type="password" required></v-text-field>
                         </v-col>
+                        <v-col style="display: flex; justify-content: flex-end;" cols="6">
+                            <v-card-actions>
+                                <v-btn text color="deep-purple accent-4" href="/" > Crear Cuenta </v-btn>
+                            </v-card-actions>
+                        </v-col>
                     </v-row>
                 </v-card-text>
-                <v-card-actions>
-                    <v-btn text color="deep-purple accent-4" href="/"> Crear Cuenta </v-btn>
-                </v-card-actions>
+                
             </v-card>
 
         </v-container>
@@ -48,7 +51,8 @@ export default {
         first_name: "",
         last_name: "",
         email: "",
-        password: ""
+        password: "",
+        password_confirmation: ""
     };
   }
 }
