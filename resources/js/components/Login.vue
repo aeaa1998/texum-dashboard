@@ -10,7 +10,7 @@
         </v-col>
       </v-row>
 
-      <v-card class="mx-auto p-4" min-width="450" width="90%">
+      <v-card class="mx-auto p-4" min-width="300" width="90%">
         <v-card-title>Ingresa tus credenciales</v-card-title>
         <v-card-text>
           <v-text-field v-model="email" label="Correo electronico" required></v-text-field>
@@ -19,8 +19,8 @@
         <v-card-actions>
           <v-btn text color="deep-purple accent-4" href="/">Ingresar</v-btn>
           <v-btn text color="deep-purple accent-4" href="/">Registrarse</v-btn>
-          <a class="ml-3 uk-link-muted" href>Olvidaste tu contraseña?</a>
         </v-card-actions>
+        <a class="ml-3 uk-link-muted" href>Olvidaste tu contraseña?</a>
       </v-card>
     </v-container>
   </div>

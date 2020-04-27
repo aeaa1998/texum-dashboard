@@ -22,7 +22,7 @@ class AuthController extends Controller
             ['id' => null, 'email' => $email, 'password' => $password, 'created_at' => $timestamp]
         );
 
-        $userID = DB::table('users')->select('id')->where('email',$email)->get();
+        $userID = DB::table('users')->select('id')->where('email', $email)->get();
 
         DB::table('workers')->insert(
             ['id' => null, 'name' => $first_name, 'last_name' => $last_name, 'user_id' => $userID]
