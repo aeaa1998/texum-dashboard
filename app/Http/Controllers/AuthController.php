@@ -3,31 +3,40 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\CreateUsersTable;
-use App\CreateWorkersTable;
-use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Worker;
+use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function userRegister(Request $request)
+    public function register(Request $request)
     {
-        $first_name = $request->input('first_name');
-        $last_name = $request->input('last_name');
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $timestamp = now();
-
-        DB::table('users')->insert(
-            ['id' => null, 'email' => $email, 'password' => $password, 'created_at' => $timestamp]
-        );
-
-        $userID = DB::table('users')->select('id')->where('email', $email)->get();
-
-        DB::table('workers')->insert(
-            ['id' => null, 'name' => $first_name, 'last_name' => $last_name, 'user_id' => $userID]
-        );
-
+        $request->validate([
+            'email' => 'required|email|unique:App\Models\User,email',
+            'password' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+        ]);
+        $user = new User();
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        $worker = new Worker();
+        $worker->first_name = $request->first_name;
+        $worker->last_name = $request->last_name;
+        $user->worker()->save($worker);
         return response()->json(["User Registered!", 200]);
+    }
+
+    public function login(Request $request)
+    {
+        $userCredentials = $request->only('email', 'password');
+
+        if (Auth::attempt($userCredentials)) {
+            return response()->json(["Authenticated", 200]);
+        } else {
+            return response()->json(["Invalid Credentials", 411]);
+        }
     }
 }
