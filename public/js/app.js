@@ -2001,6 +2001,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37818,7 +37819,7 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("v-col", { attrs: { cols: "12" } }, [
+              _c("v-col", { attrs: { cols: "3" } }, [
                 _c("h1", { staticClass: "text-center text-white" }, [
                   _vm._v(" Texum S.A ")
                 ])
@@ -37841,6 +37842,7 @@ var render = function() {
                 [
                   _c(
                     "v-row",
+                    { staticStyle: { padding: "0px" } },
                     [
                       _c(
                         "v-col",
@@ -37943,38 +37945,33 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c(
-                        "v-col",
-                        {
-                          staticStyle: {
-                            display: "flex",
-                            "justify-content": "flex-end"
-                          },
-                          attrs: { cols: "6" }
+                      _c("v-col", {
+                        staticStyle: {
+                          display: "flex",
+                          "justify-content": "flex-end"
                         },
-                        [
-                          _c(
-                            "v-card-actions",
-                            [
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: {
-                                    text: "",
-                                    color: "deep-purple accent-4",
-                                    href: "/"
-                                  }
-                                },
-                                [_vm._v(" Crear Cuenta ")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
+                        attrs: { cols: "6" }
+                      })
                     ],
                     1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        text: "",
+                        color: "deep-purple accent-4",
+                        href: "/"
+                      }
+                    },
+                    [_vm._v(" Crear Cuenta ")]
                   )
                 ],
                 1
