@@ -6,7 +6,7 @@
           <img class="w-100" src="images/texum-logo.svg" alt="Kiwi standing on oval" />
         </v-col>
         <v-col cols="12">
-          <h1 class="text-center text-white">Texum S.A.</h1>
+          <h1 class="text-center text-white">Texsun S.A.</h1>
         </v-col>
       </v-row>
 
