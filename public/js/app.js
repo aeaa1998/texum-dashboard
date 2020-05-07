@@ -1935,11 +1935,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      validLoginform: true,
+      rules: {
+        required: function required(value) {
+          return !!value || "Requerido.";
+        },
+        counter: function counter(value) {
+          return value.length >= 6 || "Minimo 6 caracteres";
+        },
+        email: function email(value) {
+          var pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(value) || "Invalid e-mail.";
+        }
+      }
     };
   }
 });
@@ -1955,6 +1982,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2002,15 +2031,101 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      first_name: "",
-      last_name: "",
+      alertDetails: {
+        show: false,
+        message: "",
+        type: "success"
+      },
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
-      password_confirmation: ""
+      passwordConfirmation: "",
+      validForm: true,
+      registerRules: {
+        required: function required(value) {
+          return !!value || "Requerido.";
+        },
+        counter: function counter(value) {
+          return value.length >= 6 || "Minimo 6 caracteres";
+        },
+        email: function email(value) {
+          var pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(value) || "Invalid e-mail.";
+        }
+      }
     };
+  },
+  methods: {
+    registerUser: function registerUser() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("register", {
+        "first_name": this.firstName,
+        "last_name": this.lastName,
+        "email": this.email,
+        "password": this.password,
+        "password_confrimation": this.passwordConfirmation
+      }).then(function (response) {
+        _this.alertDetails.show = true;
+        _this.alertDetails.type = "success";
+        _this.alertDetails.message = "Usuario creado con exito. Por favor espera mientras te redirigimos.";
+        setTimeout(function () {
+          window.location.replace("/");
+        }, 1000);
+        setTimeout(function () {
+          _this.alertDetails.show = false;
+        }, 3000);
+      })["catch"](function (e) {
+        _this.alertDetails.show = true;
+        _this.alertDetails.type = "error";
+        _this.alertDetails.message = "El usuario ya ha sido tomado";
+        setTimeout(function () {
+          _this.alertDetails.show = false;
+        }, 3000);
+      });
+    }
+  },
+  computed: {
+    passwordMatchRule: function passwordMatchRule() {
+      var _this2 = this;
+
+      return function () {
+        return _this2.password == _this2.passwordConfirmation || "Las contraseñas no coinciden";
+      };
+    }
   }
 });
 
@@ -37673,7 +37788,7 @@ var render = function() {
             [
               _c("v-col", { attrs: { cols: "2" } }, [
                 _c("img", {
-                  staticClass: "w-100",
+                  staticClass: "w-100 text-white",
                   attrs: {
                     src: "images/texum-logo.svg",
                     alt: "Kiwi standing on oval"
@@ -37683,7 +37798,7 @@ var render = function() {
               _vm._v(" "),
               _c("v-col", { attrs: { cols: "12" } }, [
                 _c("h1", { staticClass: "text-center text-white" }, [
-                  _vm._v("Texum S.A.")
+                  _vm._v("Texsun S.A.")
                 ])
               ])
             ],
@@ -37700,71 +37815,87 @@ var render = function() {
               _c("v-card-title", [_vm._v("Ingresa tus credenciales")]),
               _vm._v(" "),
               _c(
-                "v-card-text",
-                [
-                  _c("v-text-field", {
-                    attrs: { label: "Correo electronico", required: "" },
-                    model: {
-                      value: _vm.email,
-                      callback: function($$v) {
-                        _vm.email = $$v
-                      },
-                      expression: "email"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("v-text-field", {
-                    attrs: {
-                      label: "Contraseña",
-                      type: "password",
-                      required: ""
+                "v-form",
+                {
+                  ref: "form",
+                  model: {
+                    value: _vm.validLoginform,
+                    callback: function($$v) {
+                      _vm.validLoginform = $$v
                     },
-                    model: {
-                      value: _vm.password,
-                      callback: function($$v) {
-                        _vm.password = $$v
-                      },
-                      expression: "password"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-actions",
+                    expression: "validLoginform"
+                  }
+                },
                 [
                   _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        text: "",
-                        color: "deep-purple accent-4",
-                        href: "/"
-                      }
-                    },
-                    [_vm._v("Ingresar")]
+                    "v-card-text",
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          rules: [_vm.rules.required, _vm.rules.email],
+                          label: "Correo electronico",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.email,
+                          callback: function($$v) {
+                            _vm.email = $$v
+                          },
+                          expression: "email"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          rules: [_vm.rules.required],
+                          label: "Contraseña",
+                          type: "password",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.password,
+                          callback: function($$v) {
+                            _vm.password = $$v
+                          },
+                          expression: "password"
+                        }
+                      })
+                    ],
+                    1
                   ),
                   _vm._v(" "),
                   _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        text: "",
-                        color: "deep-purple accent-4",
-                        href: "/"
-                      }
-                    },
-                    [_vm._v("Registrarse")]
+                    "v-card-actions",
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            disabled: !_vm.validLoginform,
+                            text: "",
+                            color: "accent-4",
+                            href: "/"
+                          }
+                        },
+                        [_vm._v("Ingresar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            text: "",
+                            color: "accent-4",
+                            href: "/register"
+                          }
+                        },
+                        [_vm._v("Registrarse")]
+                      )
+                    ],
+                    1
                   )
                 ],
                 1
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                { staticClass: "ml-3 uk-link-muted", attrs: { href: "" } },
-                [_vm._v("Olvidaste tu contraseña?")]
               )
             ],
             1
@@ -37803,6 +37934,19 @@ var render = function() {
     { staticClass: "vh-100 tikal-wallpaper" },
     [
       _c(
+        "v-alert",
+        {
+          staticClass: "w-50 position-relative s-alert",
+          attrs: {
+            type: _vm.alertDetails.type,
+            transition: "scale-transition",
+            value: _vm.alertDetails.show
+          }
+        },
+        [_vm._v(_vm._s(_vm.alertDetails.message))]
+      ),
+      _vm._v(" "),
+      _c(
         "v-container",
         [
           _c(
@@ -37821,7 +37965,7 @@ var render = function() {
               _vm._v(" "),
               _c("v-col", { attrs: { cols: "3" } }, [
                 _c("h1", { staticClass: "text-center text-white" }, [
-                  _vm._v(" Texum S.A ")
+                  _vm._v("Texsun S.A")
                 ])
               ])
             ],
@@ -37831,147 +37975,189 @@ var render = function() {
           _c(
             "v-card",
             {
-              staticClass: "mx-auto p-4",
+              staticClass: "mx-auto p-3",
               attrs: { "min-width": "300", width: "90%" }
             },
             [
-              _c("v-card-title", [_vm._v(" Crea tu usuario ")]),
+              _c("v-card-title", [_vm._v("Crea tu usuario")]),
               _vm._v(" "),
               _c(
-                "v-card-text",
+                "v-form",
+                {
+                  ref: "form",
+                  model: {
+                    value: _vm.validForm,
+                    callback: function($$v) {
+                      _vm.validForm = $$v
+                    },
+                    expression: "validForm"
+                  }
+                },
                 [
                   _c(
-                    "v-row",
-                    { staticStyle: { padding: "0px" } },
+                    "v-card-text",
                     [
                       _c(
-                        "v-col",
-                        { attrs: { cols: "6" } },
+                        "v-row",
                         [
-                          _c("v-text-field", {
-                            attrs: { label: "Primer Nombre", required: "" },
-                            model: {
-                              value: _vm.first_name,
-                              callback: function($$v) {
-                                _vm.first_name = $$v
-                              },
-                              expression: "first_name"
-                            }
-                          })
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  rules: [_vm.registerRules.required],
+                                  dense: "",
+                                  label: "Primer Nombre",
+                                  required: ""
+                                },
+                                model: {
+                                  value: _vm.firstName,
+                                  callback: function($$v) {
+                                    _vm.firstName = $$v
+                                  },
+                                  expression: "firstName"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  rules: [_vm.registerRules.required],
+                                  dense: "",
+                                  label: "Primer Apellido",
+                                  required: ""
+                                },
+                                model: {
+                                  value: _vm.lastName,
+                                  callback: function($$v) {
+                                    _vm.lastName = $$v
+                                  },
+                                  expression: "lastName"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  rules: [
+                                    _vm.registerRules.required,
+                                    _vm.registerRules.email
+                                  ],
+                                  dense: "",
+                                  label: "Correo electronico",
+                                  required: ""
+                                },
+                                model: {
+                                  value: _vm.email,
+                                  callback: function($$v) {
+                                    _vm.email = $$v
+                                  },
+                                  expression: "email"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  rules: [
+                                    _vm.registerRules.required,
+                                    _vm.registerRules.counter
+                                  ],
+                                  dense: "",
+                                  label: "Contraseña",
+                                  type: "password",
+                                  required: ""
+                                },
+                                model: {
+                                  value: _vm.password,
+                                  callback: function($$v) {
+                                    _vm.password = $$v
+                                  },
+                                  expression: "password"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  rules: [
+                                    _vm.registerRules.required,
+                                    _vm.passwordMatchRule,
+                                    _vm.registerRules.counter
+                                  ],
+                                  label: "Confirmar contraseña",
+                                  type: "password",
+                                  required: ""
+                                },
+                                model: {
+                                  value: _vm.passwordConfirmation,
+                                  callback: function($$v) {
+                                    _vm.passwordConfirmation = $$v
+                                  },
+                                  expression: "passwordConfirmation"
+                                }
+                              })
+                            ],
+                            1
+                          )
                         ],
                         1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "6" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: { label: "Primer Apellido", required: "" },
-                            model: {
-                              value: _vm.last_name,
-                              callback: function($$v) {
-                                _vm.last_name = $$v
-                              },
-                              expression: "last_name"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "6" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              label: "Correo electronico",
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.email,
-                              callback: function($$v) {
-                                _vm.email = $$v
-                              },
-                              expression: "email"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "6" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              label: "Contraseña",
-                              type: "password",
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.password,
-                              callback: function($$v) {
-                                _vm.password = $$v
-                              },
-                              expression: "password"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "6" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              label: "Confirmar contraseña",
-                              type: "password",
-                              required: ""
-                            },
-                            model: {
-                              value: _vm.password_confirmation,
-                              callback: function($$v) {
-                                _vm.password_confirmation = $$v
-                              },
-                              expression: "password_confirmation"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("v-col", {
-                        staticStyle: {
-                          display: "flex",
-                          "justify-content": "flex-end"
-                        },
-                        attrs: { cols: "6" }
-                      })
+                      )
                     ],
                     1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card-actions",
-                [
+                  ),
+                  _vm._v(" "),
                   _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        text: "",
-                        color: "deep-purple accent-4",
-                        href: "/"
-                      }
-                    },
-                    [_vm._v(" Crear Cuenta ")]
+                    "v-card-actions",
+                    [
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            disabled: !_vm.validForm,
+                            text: "",
+                            color: "accent-4"
+                          },
+                          on: { click: _vm.registerUser }
+                        },
+                        [_vm._v("Crear Cuenta")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "ml-3 uk-link-muted",
+                          attrs: { href: "/" }
+                        },
+                        [_vm._v("Ya tienes usuario? Inicia sesión")]
+                      )
+                    ],
+                    1
                   )
                 ],
                 1
@@ -92053,8 +92239,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/cristinabautista/Desktop/Ingeniera_Software/Proyecto/texum-dashboard/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/cristinabautista/Desktop/Ingeniera_Software/Proyecto/texum-dashboard/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/tito/www/texsun-dv2/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/tito/www/texsun-dv2/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

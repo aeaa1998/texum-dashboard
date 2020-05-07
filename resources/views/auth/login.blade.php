@@ -2,6 +2,10 @@
 
 @section('content')
 <div>
-    <login />
+
+    <login  />
+
+
+
 </div>
 @endsection

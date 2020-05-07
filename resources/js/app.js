@@ -32,5 +32,5 @@ Vue.component('register', require('./components/Register.vue').default);
 
 const app = new Vue({
     el: '#app',
-    vuetify: new Vuetify(),
+    vuetify: new Vuetify()
 });
