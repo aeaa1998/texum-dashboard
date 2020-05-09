@@ -18,6 +18,7 @@ class CreateLockersTable extends Migration {
 			$table->integer('row');
 			$table->integer('capacity');
 			$table->timestamps();
+			$table->unique(['letter','column','row']);
 		});
 	}
 
