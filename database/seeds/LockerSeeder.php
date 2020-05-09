@@ -1474,7 +1474,7 @@ class LockerSeeder extends Seeder
         DB::table('lockers')->insert(['letter' => 'J', 'column' => 42, 'row' => 3, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
         DB::table('lockers')->insert(['letter' => 'J', 'column' => 43, 'row' => 3, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
         DB::table('lockers')->insert(['letter' => 'J', 'column' => 44, 'row' => 3, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
-    
+
         //Rack K
         DB::table('lockers')->insert(['letter' => 'K', 'column' => 1, 'row' => 1, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
         DB::table('lockers')->insert(['letter' => 'K', 'column' => 2, 'row' => 1, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
