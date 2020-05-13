@@ -18,6 +18,8 @@ class CreateRecordsTable extends Migration
             $table->foreignId('package_id')->constrained();
             $table->unsignedBigInteger('old_locker');
             $table->unsignedBigInteger('new_locker');
+            $table->unsignedBigInteger('worker_id');
+            $table->foreign('worker_id')->references('id')->on('workers');
             $table->foreign('old_locker')->references('id')->on('lockers');
             $table->foreign('new_locker')->references('id')->on('lockers');
             $table->timestamps();
