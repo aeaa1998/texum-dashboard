@@ -22,7 +22,12 @@
           <v-icon dark v-on="on">mdi-account</v-icon>
         </template>
         <v-list dark>
-          <v-list-item class="pointer" v-for="(item, index) in accountItems" :key="index">
+          <v-list-item
+            class="pointer"
+            v-for="(item, index) in accountItems"
+            :key="index"
+            :href="item.action"
+          >
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -55,6 +60,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   data: () => ({
     collapseOnScroll: true,
@@ -70,11 +76,16 @@ export default {
       { title: "Cerrar Sesion" }
     ],
     accountItems: [
-      { title: "Perfil de usuario" },
-      { title: "Ajustes" },
-      { title: "Cerrar sesión" }
+      { title: "Perfil de usuario", action: "/" },
+      { title: "Ajustes", action: "/" },
+      { title: "Cerrar sesión", action: "/logout" }
     ]
   }),
+  methods: {
+    logout() {
+      axios.post("/logout").then(() => window.location.replace("/"));
+    }
+  },
   beforeMount() {
     this.group = 0;
   }

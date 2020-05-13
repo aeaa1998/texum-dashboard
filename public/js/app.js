@@ -2165,6 +2165,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2221,6 +2223,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2240,13 +2248,23 @@ __webpack_require__.r(__webpack_exports__);
         title: "Cerrar Sesion"
       }],
       accountItems: [{
-        title: "Perfil de usuario"
+        title: "Perfil de usuario",
+        action: "/"
       }, {
-        title: "Ajustes"
+        title: "Ajustes",
+        action: "/"
       }, {
-        title: "Cerrar sesión"
+        title: "Cerrar sesión",
+        action: "/logout"
       }]
     };
+  },
+  methods: {
+    logout: function logout() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/logout").then(function () {
+        return window.location.replace("/");
+      });
+    }
   },
   beforeMount: function beforeMount() {
     this.group = 0;
@@ -39077,7 +39095,11 @@ var render = function() {
                 _vm._l(_vm.accountItems, function(item, index) {
                   return _c(
                     "v-list-item",
-                    { key: index, staticClass: "pointer" },
+                    {
+                      key: index,
+                      staticClass: "pointer",
+                      attrs: { href: item.action }
+                    },
                     [_c("v-list-item-title", [_vm._v(_vm._s(item.title))])],
                     1
                   )

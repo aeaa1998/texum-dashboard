@@ -44,4 +44,10 @@ class AuthController extends Controller
             return response()->json(["Invalid Credentials"], 411);
         }
     }
+
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+        return view('auth.login');
+    }
 }
