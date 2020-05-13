@@ -1,4 +1,5 @@
 import Vuetify from 'vuetify';
+import '@mdi/font/css/materialdesignicons.css'
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -23,6 +24,8 @@ Vue.use(Vuetify);
 
 Vue.component('login', require('./components/Login.vue').default);
 Vue.component('register', require('./components/Register.vue').default);
+Vue.component('mainmenu', require('./components/MainMenu.vue').default);
+Vue.component('navbar', require('./components/Navbar.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
