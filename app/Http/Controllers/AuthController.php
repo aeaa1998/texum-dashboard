@@ -1,38 +1,38 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use App\User;
+use App\Models\User;
+use App\Models\Worker;
+use Illuminate\Support\Facades\Hash;
+
 class AuthController extends Controller
 {
-    /**
-     * Create user
-     *
-     * @param  [string] name
-     * @param  [string] email
-     * @param  [string] password
-     * @param  [string] password_confirmation
-     * @return [string] message
-     */
-    public function signup(Request $request)
+    public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed'
+            'email'      => 'required|email|unique:App\Models\User,email',
+            'password'   => 'required',
+            'first_name' => 'required',
+            'last_name'  => 'required',
         ]);
-        $user = new User([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
-        ]);
+        $user           = new User();
+        $user->email    = $request->email;
+        $user->password = Hash::make($request->password);
         $user->save();
-        return response()->json([
-            'message' => 'Successfully created user!'
-        ], 201);
+        $worker             = new Worker();
+        $worker->first_name = $request->first_name;
+        $worker->last_name  = $request->last_name;
+        $worker->user_id    = $user->id;
+        // $user->worker()->save($worker);
+        $worker->save();
+
+        return response()->json(["message", "successfully created"]);
     }
-  
+
     /**
      * Login user and create token
      *
@@ -51,7 +51,7 @@ class AuthController extends Controller
             'remember_me' => 'boolean'
         ]);
         $credentials = request(['email', 'password']);
-        if(!Auth::attempt($credentials))
+        if (!Auth::attempt($credentials))
             return response()->json([
                 'message' => 'Unauthorized'
             ], 401);
@@ -69,7 +69,7 @@ class AuthController extends Controller
             )->toDateTimeString()
         ]);
     }
-  
+
     /**
      * Logout user (Revoke the token)
      *
@@ -81,15 +81,5 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Successfully logged out'
         ]);
-    }
-  
-    /**
-     * Get the authenticated User
-     *
-     * @return [json] user object
-     */
-    public function user(Request $request)
-    {
-        return response()->json($request->user());
     }
 }

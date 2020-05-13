@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use  app\Http\Controllers\Auth\OAuthContoller;
 
 
 /*
@@ -19,4 +18,3 @@ Route::view('/', 'auth.login');
 Route::view('/register', 'auth.register');
 Route::post('login', 'AuthController@login')->name('login');
 Route::post('register', 'AuthController@register');
-Route::post('login', 'OAuthController@login')->name('oauth-login');
