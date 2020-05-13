@@ -1993,6 +1993,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2034,9 +2036,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      alertDetails: {
+        show: false,
+        message: "",
+        type: "success"
+      },
       email: "",
       password: "",
       validLoginform: true,
@@ -2053,6 +2067,33 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     };
+  },
+  methods: {
+    login: function login() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/login", {
+        email: this.email,
+        password: this.password
+      }).then(function (response) {
+        _this.alertDetails.show = true;
+        _this.alertDetails.type = "success";
+        _this.alertDetails.message = "Se ha registrado con exito. Por favor espera mientras te redirigimos.";
+        setTimeout(function () {
+          _this.alertDetails.show = false;
+        }, 3000);
+        setTimeout(function () {
+          window.location.replace("/home");
+        }, 1000);
+      })["catch"](function (error) {
+        _this.alertDetails.show = true;
+        _this.alertDetails.type = "error";
+        _this.alertDetails.message = "Credenciales inválidas";
+        setTimeout(function () {
+          _this.alertDetails.show = false;
+        }, 3000);
+      });
+    }
   }
 });
 
@@ -2300,6 +2341,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2334,21 +2381,21 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("register", {
-        "first_name": this.firstName,
-        "last_name": this.lastName,
-        "email": this.email,
-        "password": this.password,
-        "password_confrimation": this.passwordConfirmation
+        first_name: this.firstName,
+        last_name: this.lastName,
+        email: this.email,
+        password: this.password,
+        password_confrimation: this.passwordConfirmation
       }).then(function (response) {
         _this.alertDetails.show = true;
         _this.alertDetails.type = "success";
         _this.alertDetails.message = "Usuario creado con exito. Por favor espera mientras te redirigimos.";
         setTimeout(function () {
-          window.location.replace("/");
-        }, 1000);
-        setTimeout(function () {
           _this.alertDetails.show = false;
         }, 3000);
+        setTimeout(function () {
+          window.location.replace("/login");
+        }, 1000);
       })["catch"](function (e) {
         _this.alertDetails.show = true;
         _this.alertDetails.type = "error";
@@ -38713,6 +38760,19 @@ var render = function() {
     { staticClass: "vh-100 tikal-wallpaper" },
     [
       _c(
+        "v-alert",
+        {
+          staticClass: "w-50 position-relative s-alert",
+          attrs: {
+            type: _vm.alertDetails.type,
+            transition: "scale-transition",
+            value: _vm.alertDetails.show
+          }
+        },
+        [_vm._v(_vm._s(_vm.alertDetails.message))]
+      ),
+      _vm._v(" "),
+      _c(
         "v-container",
         [
           _c(
@@ -38765,6 +38825,7 @@ var render = function() {
                     [
                       _c("v-text-field", {
                         attrs: {
+                          "validate-on-blur": "",
                           rules: [_vm.rules.required, _vm.rules.email],
                           label: "Correo electronico",
                           required: ""
@@ -38806,9 +38867,9 @@ var render = function() {
                           attrs: {
                             disabled: !_vm.validLoginform,
                             text: "",
-                            color: "accent-4",
-                            href: "/"
-                          }
+                            color: "accent-4"
+                          },
+                          on: { click: _vm.login }
                         },
                         [_vm._v("Ingresar")]
                       ),
@@ -39248,6 +39309,7 @@ var render = function() {
                                     _vm.registerRules.email
                                   ],
                                   dense: "",
+                                  "validate-on-blur": "",
                                   label: "Correo electronico",
                                   required: ""
                                 },

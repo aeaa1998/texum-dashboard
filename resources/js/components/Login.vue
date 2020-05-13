@@ -1,7 +1,12 @@
 <template>
   <div class="vh-100 tikal-wallpaper">
+    <v-alert
+      class="w-50 position-relative s-alert"
+      :type="alertDetails.type"
+      transition="scale-transition"
+      :value="alertDetails.show"
+    >{{alertDetails.message}}</v-alert>
     <v-container>
-      
       <v-row align="center" justify="center">
         <v-col cols="2">
           <img class="w-100 text-white" src="images/texum-logo.svg" alt="Kiwi standing on oval" />
@@ -17,6 +22,7 @@
           <v-card-text>
             <v-text-field
               v-model="email"
+              validate-on-blur
               :rules="[rules.required, rules.email]"
               label="Correo electronico"
               required
@@ -30,7 +36,7 @@
             ></v-text-field>
           </v-card-text>
           <v-card-actions>
-            <v-btn :disabled="!validLoginform" text color="accent-4" href="/">Ingresar</v-btn>
+            <v-btn :disabled="!validLoginform" text color="accent-4" @click="login">Ingresar</v-btn>
             <v-btn text color="accent-4" href="/register">Registrarse</v-btn>
           </v-card-actions>
         </v-form>
@@ -40,12 +46,16 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
-
   data: () => {
     return {
+      alertDetails: {
+        show: false,
+        message: "",
+        type: "success"
+      },
       email: "",
-
       password: "",
       validLoginform: true,
       rules: {
@@ -58,6 +68,34 @@ export default {
       }
     };
   },
-
+  methods: {
+    login() {
+      axios
+        .post("/login", {
+          email: this.email,
+          password: this.password
+        })
+        .then(response => {
+          this.alertDetails.show = true;
+          this.alertDetails.type = "success";
+          this.alertDetails.message =
+            "Se ha registrado con exito. Por favor espera mientras te redirigimos.";
+          setTimeout(() => {
+            this.alertDetails.show = false;
+          }, 3000);
+          setTimeout(() => {
+            window.location.replace("/home");
+          }, 1000);
+        })
+        .catch(error => {
+          this.alertDetails.show = true;
+          this.alertDetails.type = "error";
+          this.alertDetails.message = "Credenciales inválidas";
+          setTimeout(() => {
+            this.alertDetails.show = false;
+          }, 3000);
+        });
+    }
+  }
 };
 </script>

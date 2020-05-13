@@ -38,6 +38,7 @@ class AuthController extends Controller
         $userCredentials = $request->only('email', 'password');
 
         if (Auth::attempt($userCredentials)) {
+            $request->session()->put('user_id', User::where('email', $request->email)->first()->id);
             return response()->json(["Authenticated"], 200);
         } else {
             return response()->json(["Invalid Credentials"], 411);

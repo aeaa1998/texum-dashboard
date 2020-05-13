@@ -1,6 +1,11 @@
 <template>
   <div class="vh-100 tikal-wallpaper">
-    <v-alert class="w-50 position-relative s-alert" :type="alertDetails.type" transition="scale-transition" :value="alertDetails.show">{{alertDetails.message}}</v-alert>
+    <v-alert
+      class="w-50 position-relative s-alert"
+      :type="alertDetails.type"
+      transition="scale-transition"
+      :value="alertDetails.show"
+    >{{alertDetails.message}}</v-alert>
     <v-container>
       <v-row align="center" justify="center">
         <v-col cols="2">
@@ -38,6 +43,7 @@
                 <v-text-field
                   :rules="[registerRules.required, registerRules.email]"
                   dense
+                  validate-on-blur
                   v-model="email"
                   label="Correo electronico"
                   required
@@ -79,9 +85,9 @@ export default {
   data: () => {
     return {
       alertDetails: {
-      show: false,
-      message: "",
-      type: "success"
+        show: false,
+        message: "",
+        type: "success"
       },
       firstName: "",
       lastName: "",
@@ -103,31 +109,31 @@ export default {
     registerUser() {
       axios
         .post("register", {
-            "first_name": this.firstName,
-            "last_name": this.lastName,
-            "email": this.email,
-            "password": this.password,
-            "password_confrimation": this.passwordConfirmation
+          first_name: this.firstName,
+          last_name: this.lastName,
+          email: this.email,
+          password: this.password,
+          password_confrimation: this.passwordConfirmation
         })
         .then(response => {
-          this.alertDetails.show = true
-          this.alertDetails.type = "success"
-          this.alertDetails.message = "Usuario creado con exito. Por favor espera mientras te redirigimos."
-          setTimeout(()=> {
-            window.location.replace("/")
-          }, 1000)
-          setTimeout(()=> {
-            this.alertDetails.show = false
-          }, 3000)
-
+          this.alertDetails.show = true;
+          this.alertDetails.type = "success";
+          this.alertDetails.message =
+            "Usuario creado con exito. Por favor espera mientras te redirigimos.";
+          setTimeout(() => {
+            this.alertDetails.show = false;
+          }, 3000);
+          setTimeout(() => {
+            window.location.replace("/login");
+          }, 1000);
         })
         .catch(e => {
-          this.alertDetails.show = true
-          this.alertDetails.type = "error"
-          this.alertDetails.message = "El usuario ya ha sido tomado"
-          setTimeout(()=> {
-            this.alertDetails.show = false
-          }, 3000)
+          this.alertDetails.show = true;
+          this.alertDetails.type = "error";
+          this.alertDetails.message = "El usuario ya ha sido tomado";
+          setTimeout(() => {
+            this.alertDetails.show = false;
+          }, 3000);
         });
     }
   },
