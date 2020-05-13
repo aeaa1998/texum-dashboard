@@ -1,7 +1,13 @@
 <template>
   <v-container class="mt-2">
     <v-row>
-      <v-col cols="12" md="6" v-for="menuOption in menuOptions" :key="menuOption.title">
+      <v-col
+        cols="12"
+        md="6"
+        v-for="menuOption in menuOptions"
+        :key="menuOption.title"
+        class="pointer"
+      >
         <v-card shaped raised height="350">
           <v-img height="100%" :src="menuOption.img" class="position-relative pt-2 pb-2">
             <div class="h-35 grey lighten-1 fixed-bottom-absolute">

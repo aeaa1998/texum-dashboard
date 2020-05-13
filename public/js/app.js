@@ -2083,6 +2083,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -38865,7 +38871,11 @@ var render = function() {
         _vm._l(_vm.menuOptions, function(menuOption) {
           return _c(
             "v-col",
-            { key: menuOption.title, attrs: { cols: "12", md: "6" } },
+            {
+              key: menuOption.title,
+              staticClass: "pointer",
+              attrs: { cols: "12", md: "6" }
+            },
             [
               _c(
                 "v-card",
