@@ -1,6 +1,12 @@
 <template>
-  <div>
-    <v-app-bar dark>
+  <div class="overflow-hidden">
+    <v-app-bar
+      dark
+      absolute
+      :collapse="!collapseOnScroll"
+      :collapse-on-scroll="collapseOnScroll"
+      scroll-target="#target"
+    >
       <v-app-bar-nav-icon v-if="group !== 0" @click="drawer = true"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Texsun S.A. Dashboard</v-toolbar-title>
@@ -25,7 +31,7 @@
 
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list nav dense>
-        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
+        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4 ">
           <v-list-item>
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
@@ -42,7 +48,8 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <div id="target">
+
+    <div id="target" class="vh-100 overflow-y-auto content-padding main-bg">
       <slot></slot>
     </div>
   </div>
@@ -50,6 +57,7 @@
 <script>
 export default {
   data: () => ({
+    collapseOnScroll: true,
     accountShortcutOpen: false,
     group: null,
     drawer: false,
@@ -73,4 +81,14 @@ export default {
 };
 </script>
 <style scoped>
+.main-bg {
+  background: url("/../images/main-bg.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.content-padding {
+  padding-top: 90px;
+}
 </style>

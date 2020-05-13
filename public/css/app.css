@@ -413,7 +413,7 @@
   height: 100%;
 }
 
-.vh-100 {
+.mvh-100 {
   min-height: 100vh !important;
 }
 
