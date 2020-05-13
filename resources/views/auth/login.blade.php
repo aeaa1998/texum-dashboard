@@ -1,11 +1,7 @@
-@extends('layouts.bookMe')
+@extends('layouts.texum')
 
 @section('content')
 <div>
-
-    <login  />
-
-
-
+    <login />
 </div>
 @endsection

@@ -1,7 +1,7 @@
 @extends('layouts.texum')
 
 @section('content')
-<div>
-    <register />
-</div>
+<navbar>
+    @yield('nav-content')
+</navbar>
 @endsection

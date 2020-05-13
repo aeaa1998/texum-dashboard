@@ -1,6 +1,15 @@
+@for $i from 1 through 100 {
+   .h-#{$i} {
+      height: percentage($i/100);
+    }
+  }
+
 .vh-100{
     min-height: 100vh !important;
 }
+
+
+
 
 .fw-300{
     width: 300px!important;

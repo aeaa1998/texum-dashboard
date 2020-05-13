@@ -1,41 +1,47 @@
 <template>
-  <div>
-    <navbar></navbar>
-    
-    <!-- Botones de las opciones -->
-    <template>
-      <v-container>
-        <v-row class="row align-items-center" justify="center" col-lg="4">
-          <v-col col-lg="4">
-            <v-sheet class="pa-2" height="350px" elevation="5">
-              <h1 align="center">
-                Busqueda por Rack
-              </h1>
-              <img src="images/texum-logo.jpeg" width="100%">
-            </v-sheet>
-          </v-col>
-          <v-col offset-lg="1">
-            <v-sheet class="pa-2" height="350px" elevation="5" col-lg="4">
-              <h1 align="center">
-                Busqueda Avanzada
-              </h1>
-              <v-icon x-large="100px">mdi-magnify</v-icon>
-            </v-sheet>
-          </v-col>
-        </v-row>
-        <v-row class="row align-items-center" justify="center" col-lg="4">
-          <v-col>
-            <v-sheet class="col-md-4 offset-md-4" height="120px" elevation="5">
-              <h1 align="center">
-                Ver Historial
-                <br>
-                <v-icon x-large>mdi-history</v-icon>
-              </h1>
-            </v-sheet>
-          </v-col>
-        </v-row>
-      </v-container>
-    </template>
-  </div>
+  <v-container class="mt-2">
+    <v-row>
+      <v-col cols="12" md="6" v-for="menuOption in menuOptions" :key="menuOption.title">
+        <v-card shaped raised height="350">
+          <v-img height="100%" :src="menuOption.img" class="position-relative pt-2 pb-2">
+            <div class="h-35 grey lighten-1 fixed-bottom-absolute">
+              <h1 class="white--text text-center mt-1">{{menuOption.title}}</h1>
+              <h5 class="white--text text-center mt-5 pl-5 pr-5">{{menuOption.label}}</h5>
+            </div>
+          </v-img>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
+<script>
+export default {
+  data: () => ({
+    menuOptions: [
+      {
+        title: "Busqueda Avanzada",
+        img: "images/texum-logo.jpeg",
+        label: "Busqueda de la paqueteria con críterios más especificos."
+      },
+      {
+        title: "Historial",
+        img: "images/records-image.jpg",
+        label:
+          "Lleva un registro de tus paquetes de donde vienen y a donde han sido reubicados."
+      },
+      {
+        title: "Mapa de bodega",
+        img: "images/map.jpg",
+        label:
+          "Ubicación de tu paqueteria dentro de la bodega. Visualiza tus paquetes en donde estan ubicados de manera gráfica."
+      },
+      {
+        title: "Mover paquetes",
+        img: "images/move-package.jpg",
+        label: "Reubica los paquetes que han sido ingresados en bodega."
+      }
+    ]
+  })
+};
+</script>
 

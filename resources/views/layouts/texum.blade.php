@@ -25,10 +25,6 @@
 <body>
     <div id="app">
         <v-app>
-            <div>
-                @yield('navBar')
-            </div>
-
             @yield('content')
         </v-app>
     </div>

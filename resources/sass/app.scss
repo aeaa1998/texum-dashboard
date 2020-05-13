@@ -12,6 +12,9 @@
 // Sizes
 @import 'sizes';
 
+// Sizes
+@import 'positions';
+
 // background-images
 @import 'background-images';
 
@@ -22,4 +25,8 @@
 
 .text-white {
     color: white;
+}
+
+.pointer {
+    cursor: pointer;
 }
