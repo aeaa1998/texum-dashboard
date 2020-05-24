@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(LockerSeeder::class);
         $this->call(RoleSeeder::class);
+        $this->call(ClientSeeder::class);
+        $this->call(LotSeeder::class);
     }
 }
