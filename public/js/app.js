@@ -2259,13 +2259,6 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
-  methods: {
-    logout: function logout() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/logout").then(function () {
-        return window.location.replace("/");
-      });
-    }
-  },
   beforeMount: function beforeMount() {
     this.group = 0;
   }

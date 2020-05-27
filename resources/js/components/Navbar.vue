@@ -81,11 +81,6 @@ export default {
       { title: "Cerrar sesión", action: "/logout" }
     ]
   }),
-  methods: {
-    logout() {
-      axios.post("/logout").then(() => window.location.replace("/"));
-    }
-  },
   beforeMount() {
     this.group = 0;
   }
