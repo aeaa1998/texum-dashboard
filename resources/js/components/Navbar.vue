@@ -43,6 +43,13 @@
             </v-list-item-icon>
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
+
+          <!-- <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Account</v-list-item-title>
+          </v-list-item>-->
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -62,6 +69,12 @@ export default {
     drawer: false,
     visible: true,
     routes: [0, 1],
+    items: [
+      { title: "Pagina Inicial" },
+      { title: "Opcion 2" },
+      { title: "Opcion 3" },
+      { title: "Cerrar Sesion" }
+    ],
     accountItems: [
       { title: "Perfil de usuario", action: "/" },
       { title: "Ajustes", action: "/" },

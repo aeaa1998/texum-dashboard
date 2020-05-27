@@ -23,6 +23,5 @@ Route::middleware(['guest'])->group(function () {
 });
 Route::middleware(['auth'])->group(function () {
     Route::view('/home', 'dashboard.main');
-    Route::view('/advanced', 'dashboard.advanced');
     Route::get('logout', 'AuthController@logout');
 });

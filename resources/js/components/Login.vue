@@ -40,6 +40,7 @@
             <v-btn text color="accent-4" href="/register">Registrarse</v-btn>
           </v-card-actions>
         </v-form>
+        <!-- <a class="ml-3 uk-link-muted" href="/register">Olvidaste tu contraseña?</a> -->
       </v-card>
     </v-container>
   </div>
