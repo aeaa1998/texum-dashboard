@@ -13,5 +13,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(LockerSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(ClientSeeder::class);
+        $this->call(LotSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(WorkersSeeder::class);
+        $this->call(PackageStatusesSeeder::class);
+        $this->call(PackageSeeder::class);
+
     }
 }
