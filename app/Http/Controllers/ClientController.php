@@ -9,17 +9,25 @@ use Carbon\Carbon;
 class ClientController extends Controller
 {
     // Obtener todos los Clientes
-    public function getAllClients()
+    public function index()
     {
+        $clients = Client::all();
+        return response()->json($clients);
+    }
+    // Obtener cliente por id
+    public function show($id)
+    {
+        $client = Client::find($id);
+        return response()->json($client);
     }
 
     // Actualizar Cliente
-    public function updateClient($oldClientName,$newClientName)
+    public function update(Request $request,$id)
     {
     }
 
     // Crear Cliente
-    public function insertClient(Request $request)
+    public function create(Request $request)
     {
         $client = new Client();
     
@@ -30,7 +38,7 @@ class ClientController extends Controller
     }
 
     // Borrar Cliente
-    public function deleteClient($clientName)
+    public function delete($id)
     {
     }
 }
