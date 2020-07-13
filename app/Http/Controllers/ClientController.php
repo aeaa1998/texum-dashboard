@@ -24,21 +24,26 @@ class ClientController extends Controller
     // Actualizar Cliente
     public function update(Request $request,$id)
     {
+        $client = Client::find($id);
+        $client->name = $request->input('name');
+        $client->save();
+        return response()->json($client);
     }
 
     // Crear Cliente
     public function create(Request $request)
     {
         $client = new Client();
-    
         $client->name = $request->input('name');
-
         $client->save();
         return response()->json($client);
     }
 
     // Borrar Cliente
-    public function delete($id)
+    public function delete(Request $request, $id)
     {
+        $client = Client::find($id);
+        $client->delete();
+        return response()->json($client);
     }
 }

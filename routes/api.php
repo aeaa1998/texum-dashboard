@@ -11,5 +11,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/clients/create','ClientController@create');
     Route::get('/clients','ClientController@index');
     Route::get('/clients/{id}','ClientController@show');
+    Route::put('/client/{id}','ClientController@update');
+    Route::delete('/client/{id}','ClientController@delete');
 });
-
