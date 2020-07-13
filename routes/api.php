@@ -9,3 +9,4 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('logout', 'OAuthController@logout');
 });
+Route::post('/client','ClientController@insertClient');
