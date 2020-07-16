@@ -13,9 +13,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/clients/{id}','ClientController@show');
     Route::put('/client/{id}','ClientController@update');
     Route::delete('/client/{id}','ClientController@delete');
-    
     Route::get('/profiles','ProfileController@index');
+
     //Route::get('/profiles/{id}','ProfileController@show');
     //Route::put('/profile/{id}','ProfileController@update');
 });
 
+Route::get('/roles','RolesController@index');
