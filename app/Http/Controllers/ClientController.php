@@ -25,7 +25,7 @@ class ClientController extends Controller
     public function update(Request $request,$id)
     {
         $client = Client::find($id);
-        $client->name = $request->input('name');
+        $client->name = $request->name;
         $client->save();
         return response()->json($client);
     }
@@ -34,7 +34,7 @@ class ClientController extends Controller
     public function create(Request $request)
     {
         $client = new Client();
-        $client->name = $request->input('name');
+        $client->name = $request->name;
         $client->save();
         return response()->json($client);
     }
