@@ -20,12 +20,12 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('/roles/{id}','RoleController@update');
     Route::delete('/roles/{id}','RoleController@delete');
     Route::post('/roles/create','RoleController@create');
-    Route::get('/UserRole','UserRoleController@index');
-
-    Route::get('/UserRole/{id}','UserRoleController@show');
-    Route::put('/UserRole/{id}','UserRoleController@update');
-    Route::delete('/UserRole/{id}','UserRoleController@delete');
-    Route::post('/UserRole/create','UserRoleController@create');
+    
+    Route::get('/userole','UserRoleController@index');
+    Route::get('/userole/{id}','UserRoleController@show');
+    Route::put('/userole/{id}','UserRoleController@update');
+    Route::delete('/userole/{id}','UserRoleController@delete');
+    Route::post('/userole/create','UserRoleController@create');
 
     //Route::get('/profiles/{id}','ProfileController@show');
     //Route::put('/profile/{id}','ProfileController@update');

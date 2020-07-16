@@ -10,41 +10,41 @@ class UserRoleController extends Controller
     //INDEX, SHOW, CREATE, UPDATE, DELETE
     public function index()
     {
-        $userRoles = UserRole::all();
-        return response()->json($userRoles);
+        $userroles = UserRole::all();
+        return response()->json($userroles);
     }
 
 
     public function show($id)
     {
-        $userRole = UserRole::find($id);
-        return response()->json($userRole);
+        $userrole = UserRole::find($id);
+        return response()->json($userrole);
     }
 
 
     public function update(Request $request,$id)
     {
-        $userRole = UserRole::find($id);
-        $userRole->name = $request->name;
-        $userRole->save();
-        return response()->json($userRole);
+        $userrole = UserRole::find($id);
+        $userrole->name = $request->name;
+        $userrole->save();
+        return response()->json($userrole);
     }
 
 
     public function create(Request $request)
     {
-        $userRole = new UserRole();
-        $userRole->user_id = $request->user_id;
-        $userRole->role_id = $request->role_id;
-        $userRole->save();
-        return response()->json($userRole);
+        $userrole = new UserRole();
+        $userrole->user_id = $request->user_id;
+        $userrole->role_id = $request->role_id;
+        $userrole->save();
+        return response()->json($userrole);
     }
 
 
     public function delete(Request $request, $id)
     {
-        $userRole = UserRole::find($id);
-        $userRole->delete();
-        return response()->json($userRole);
+        $userrole = UserRole::find($id);
+        $userrole->delete();
+        return response()->json($userrole);
     }
 }
