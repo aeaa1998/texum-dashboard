@@ -15,8 +15,21 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::delete('/client/{id}','ClientController@delete');
     Route::get('/profiles','ProfileController@index');
 
+    Route::get('/roles','RoleController@index');
+    Route::get('/roles/{id}','RoleController@show');
+    Route::put('/roles/{id}','RoleController@update');
+    Route::delete('/roles/{id}','RoleController@delete');
+    Route::post('/roles/create','RoleController@create');
+    Route::get('/UserRole','UserRoleController@index');
+
+    Route::get('/UserRole/{id}','UserRoleController@show');
+    Route::put('/UserRole/{id}','UserRoleController@update');
+    Route::delete('/UserRole/{id}','UserRoleController@delete');
+    Route::post('/UserRole/create','UserRoleController@create');
+
     //Route::get('/profiles/{id}','ProfileController@show');
     //Route::put('/profile/{id}','ProfileController@update');
 });
 
-Route::get('/roles','RolesController@index');
+
+
