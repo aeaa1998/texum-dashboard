@@ -31,7 +31,7 @@ class UserRoleController extends Controller
     }
 
 
-    public function create(Request $request)
+    /*public function create(Request $request)
     {
         $userrole = new UserRole();
         $userrole->user_id = $request->user_id;
@@ -39,7 +39,7 @@ class UserRoleController extends Controller
         $userrole->save();
         return response()->json($userrole);
     }
-
+    */
 
     public function delete(Request $request, $id)
     {
