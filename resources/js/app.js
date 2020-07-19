@@ -26,7 +26,7 @@ Vue.component('login', require('./components/Login.vue').default);
 Vue.component('register', require('./components/Register.vue').default);
 Vue.component('mainmenu', require('./components/MainMenu.vue').default);
 Vue.component('navbar', require('./components/Navbar.vue').default);
-Vue.component('advancedsearch', require('./components/AdvancedSearch.vue')).default;
+Vue.component('advanced-search', require('./components/Search.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

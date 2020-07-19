@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Exception;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use League\OAuth2\Server\Exception\OAuthServerException;
+use Laravel\Passport\Exceptions\OAuthServerException;
 
 class OAuthController extends AccessTokenController
 {
@@ -16,28 +16,19 @@ class OAuthController extends AccessTokenController
     public function login(ServerRequestInterface $request)
     {
         try {
+
             $tokenResponse = parent::issueToken($request);
 
             $token = $tokenResponse->getContent();
-
             $tokenInfo = json_decode($token, true);
-
             if (array_key_exists('error', $tokenInfo)) {
-
                 return response($tokenInfo, 401);
             }
-
             $request = $request->getParsedBody();
-
-            $username = $request['username'];
-
+            $email = $request['username'];
             $user     = User::where('email', $email)->first();
-
             $tokenInfo = collect($tokenInfo);
-
             $tokenInfo->put('user', $user);
-
-
             return $tokenInfo;
         } catch (ModelNotFoundException $e) {
             //email not found
@@ -46,7 +37,7 @@ class OAuthController extends AccessTokenController
         } catch (OAuthServerException $e) {
             //password no correct
             //return error message
-            return response(["mensaje" => "El usuario uso credenciales no correctas,', 6, 'invalid_credentials"], 500);
+            return response(["mensaje" => "El usuario uso credenciales no correctas,', 6, 'invalid_credentials"], 401);
         } catch (Exception $e) {
             //return error message
             return response(["mensaje" => "Internal server error"], 500);

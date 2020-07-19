@@ -69,7 +69,9 @@ export default {
     ]
   }),
   beforeMount() {
-    this.group = 0;
+    this.group = window.location.pathname !== "/home" ? 1 : 0;
+    // console.log(window.location.pathname);
+    // this.group = 0;
   }
 };
 </script>

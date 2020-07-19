@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
 
 @section('nav-content')
-<advancedsearch />
+<advanced-search />
 @endsection
