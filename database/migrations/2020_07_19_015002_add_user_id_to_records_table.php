@@ -14,7 +14,7 @@ class AddUserIdToRecordsTable extends Migration
     public function up()
     {
         Schema::table('records', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained()->after('package_id');
+            $table->foreignId('user_id')->after('package_id')->constrained();
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\UserRole;
 
@@ -10,24 +11,31 @@ class UserRoleController extends Controller
     //INDEX, SHOW, CREATE, UPDATE, DELETE
     public function index()
     {
-        $userroles = UserRole::all();
-        return response()->json($userroles);
+        $users = User::with('roles')->get();
+        return response()->json(['users' => $users]);
     }
 
 
     public function show($id)
     {
-        $userrole = UserRole::find($id);
-        return response()->json($userrole);
+        $userRole = UserRole::find($id);
+        return response()->json($userRole);
     }
 
-
-    public function update(Request $request,$id)
+    /**
+     * @param $request->user_id
+     * @param $reques->roles Array<Int>
+     */
+    public function update(Request $request, $userId)
     {
-        $userrole = UserRole::find($id);
-        $userrole->name = $request->name;
-        $userrole->save();
-        return response()->json($userrole);
+        $user = User::with('roles')->where('id', $userId)->first();
+
+        $user->roles()->detach();
+        collect($request->roles)->map(function ($roleId) use ($user) {
+            $user->roles()->attach($roleId);
+        });
+        $user->refresh();
+        return response()->json($user);
     }
 
 
@@ -43,8 +51,8 @@ class UserRoleController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $userrole = UserRole::find($id);
-        $userrole->delete();
-        return response()->json($userrole);
+        $userRole = UserRole::find($id);
+        $userRole->delete();
+        return response()->json($userRole);
     }
 }

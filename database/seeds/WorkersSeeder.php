@@ -12,7 +12,8 @@ class WorkersSeeder extends Seeder
      */
     public function run()
     {
-        factory(Worker::class, 20)->create();
+        Worker::truncate();
+        factory(Worker::class, 40)->create();
         //
     }
 }

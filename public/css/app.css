@@ -11329,3 +11329,7 @@ a.text-dark:focus {
   cursor: pointer;
 }
 
+.fluid {
+  max-width: 100% !important;
+}
+

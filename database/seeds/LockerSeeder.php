@@ -14,6 +14,7 @@ class LockerSeeder extends Seeder
     public function run()
     {
         $now = Carbon::now();
+        Locker::truncate();
         //Rack A
         Locker::insert(['letter' => 'A', 'column' => 1, 'row' => 1, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
         Locker::insert(['letter' => 'A', 'column' => 2, 'row' => 1, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
@@ -1341,7 +1342,7 @@ class LockerSeeder extends Seeder
         Locker::insert(['letter' => 'I', 'column' => 44, 'row' => 3, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
         Locker::insert(['letter' => 'I', 'column' => 45, 'row' => 3, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
         Locker::insert(['letter' => 'I', 'column' => 46, 'row' => 3, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
-       
+
         Locker::insert(['letter' => 'J', 'column' => 1, 'row' => 1, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
         Locker::insert(['letter' => 'J', 'column' => 2, 'row' => 1, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
         Locker::insert(['letter' => 'J', 'column' => 3, 'row' => 1, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
@@ -1474,7 +1475,7 @@ class LockerSeeder extends Seeder
         Locker::insert(['letter' => 'J', 'column' => 42, 'row' => 3, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
         Locker::insert(['letter' => 'J', 'column' => 43, 'row' => 3, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
         Locker::insert(['letter' => 'J', 'column' => 44, 'row' => 3, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);
-    
+
 
         //Rack K
         Locker::insert(['letter' => 'K', 'column' => 1, 'row' => 1, 'capacity' => 50, 'created_at' => $now, 'updated_at' => $now]);

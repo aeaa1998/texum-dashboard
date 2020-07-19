@@ -19,11 +19,10 @@ Route::middleware(['guest'])->group(function () {
     Route::view('/login', 'auth.login')->name('login');
     Route::view('/register', 'auth.register');
     Route::post('login', 'AuthController@login');
-
     Route::post('register', 'AuthController@register');
 });
-Route::middleware(['auth'])->group(function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::view('/home', 'dashboard.main');
-    Route::view('/advanced', 'dashboard.advanced');
+    Route::get('/packages/general', 'Packages\Controller@index');
     Route::get('logout', 'AuthController@logout');
 });

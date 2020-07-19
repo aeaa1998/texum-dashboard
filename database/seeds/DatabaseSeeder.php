@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,14 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(LockerSeeder::class);
-        $this->call(RoleSeeder::class);
+        Schema::disableForeignKeyConstraints();
         $this->call(ClientSeeder::class);
-        $this->call(LotSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(WorkersSeeder::class);
+        $this->call(LotSeeder::class);
+        $this->call(LockerSeeder::class);
+        $this->call(RoleSeeder::class);
         $this->call(PackageStatusesSeeder::class);
         $this->call(PackageSeeder::class);
-
+        Schema::enableForeignKeyConstraints();
     }
 }

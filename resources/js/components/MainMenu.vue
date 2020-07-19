@@ -30,7 +30,7 @@ export default {
         title: "Busqueda Avanzada",
         img: "images/texum-logo.jpeg",
         label: "Busqueda de la paqueteria con críterios más especificos.",
-        href: "/advanced"
+        href: "/packages/general"
       },
       {
         title: "Historial",

@@ -12,6 +12,7 @@ class PackageSeeder extends Seeder
      */
     public function run()
     {
+        Package::truncate();
         factory(Package::class, 2500)->create();
         //
     }

@@ -12,6 +12,7 @@ class LotSeeder extends Seeder
      */
     public function run()
     {
+        Lot::truncate();
         factory(Lot::class, 200)->create();
     }
 }
