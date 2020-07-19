@@ -7,11 +7,13 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Worker;
 
-class User extends Authenticatable {
+class User extends Authenticatable
+{
 
 	use HasApiTokens, Notifiable;
-	
-	public function credentials() {
-		return $this->hasMany(Worker::class,'user_id');
+
+	public function worker()
+	{
+		$this->hasOne('App\Models\Worker');
 	}
 }
