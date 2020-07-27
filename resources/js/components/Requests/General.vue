@@ -9,7 +9,7 @@
             </div>
 
             <!-- This is the search component -->
-            <v-expansion-panels v-else class="mb-1">
+            <!-- <v-expansion-panels v-else class="mb-1">
               <v-expansion-panel>
                 <v-expansion-panel-header>Filtros de busqueda</v-expansion-panel-header>
                 <v-expansion-panel-content>
@@ -75,7 +75,7 @@
                   </v-form>
                 </v-expansion-panel-content>
               </v-expansion-panel>
-            </v-expansion-panels>
+            </v-expansion-panels>-->
           </v-col>
           <v-col sm="12" md="9">
             <div v-if="isLoading">
@@ -83,22 +83,25 @@
             </div>
             <v-card v-else>
               <v-card-title>
-                Paquetes
+                Historial de Paquetes
                 <v-spacer></v-spacer>
                 <v-text-field v-model="generalFilter" label="Buscar" single-line hide-details></v-text-field>
                 <v-btn icon>
                   <v-icon>mdi-magnify</v-icon>
                 </v-btn>
               </v-card-title>
-              <v-data-table :headers="headers" :items="packages" hide-default-footer>
+              <v-data-table :headers="headers" :items="records" hide-default-footer>
                 <template v-slot:item.actions="{ item }">
                   <v-btn icon @click="navigateToDetail(item)">
                     <v-icon>mdi-eye</v-icon>
                   </v-btn>
                 </template>
                 <template
-                  v-slot:item.actualLocker="{ item }"
-                >{{`${item.currentLocker.letter} - ${item.currentLocker.row} - ${item.currentLocker.column}`}}</template>
+                  v-slot:item.oldLocker="{ item }"
+                >{{`${item.oldLocker.letter} - ${item.oldLocker.row} - ${item.oldLocker.column}`}}</template>
+                <template
+                  v-slot:item.newLocker="{ item }"
+                >{{`${item.newLocker.letter} - ${item.newLocker.row} - ${item.newLocker.column}`}}</template>
               </v-data-table>
               <div>
                 <v-pagination
@@ -217,9 +220,12 @@ export default {
     barCode: "",
     lotId: null,
     statusId: null,
-    letter: null,
-    row: null,
-    column: null,
+    old_letter: null,
+    old_row: null,
+    old_column: null,
+    new_letter: null,
+    new_row: null,
+    new_column: null,
   }),
   beforeMount() {
     this.pagination = this.payload;

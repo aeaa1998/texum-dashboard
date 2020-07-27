@@ -1,6 +1,6 @@
 import Vuetify from 'vuetify';
 import '@mdi/font/css/materialdesignicons.css'
-
+// import moment from 'moment'
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -11,6 +11,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 Vue.use(Vuetify);
+// Vue.use(moment)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -27,6 +28,7 @@ Vue.component('register', require('./components/Register.vue').default);
 Vue.component('mainmenu', require('./components/MainMenu.vue').default);
 Vue.component('navbar', require('./components/Navbar.vue').default);
 Vue.component('package-general', require('./components/Packages/General.vue').default);
+Vue.component('records-general', require('./components/Records/General.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

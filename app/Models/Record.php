@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Record extends Model
 {
+
+    function package()
+    {
+        return $this->belongsTo('App\Models\Package');
+    }
     function user()
     {
         return $this->belongsTo('App\Models\User');

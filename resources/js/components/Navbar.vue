@@ -2,6 +2,7 @@
   <div class="overflow-hidden">
     <v-app-bar
       dark
+      style="z-index: 2;"
       absolute
       :collapse="!collapseOnScroll"
       :collapse-on-scroll="collapseOnScroll"
@@ -37,12 +38,15 @@
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list nav dense>
         <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4 ">
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item>
+          <a v-for="item in drawerItems" :key="item.title" :href="item.href" class="no-underline">
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>{{item.icon}}</v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-title>{{item.title}}</v-list-item-title>
+            </v-list-item>
+          </a>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -62,6 +66,13 @@ export default {
     drawer: false,
     visible: true,
     routes: [0, 1],
+    drawerItems: [
+      {
+        icon: "mdi-home",
+        title: "Home",
+        href: "/home"
+      }
+    ],
     accountItems: [
       { title: "Perfil de usuario", action: "/" },
       { title: "Ajustes", action: "/" },
@@ -76,6 +87,9 @@ export default {
 };
 </script>
 <style scoped>
+.no-underline {
+  text-decoration: none;
+}
 .main-bg {
   background: url("/../images/main-bg.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;

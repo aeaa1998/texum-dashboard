@@ -30,30 +30,30 @@ export default {
         title: "Busqueda Avanzada",
         img: "images/texum-logo.jpeg",
         label: "Busqueda de la paqueteria con críterios más especificos.",
-        href: "/packages/general"
+        href: "/packages/general",
       },
       {
         title: "Historial",
         img: "images/records-image.jpg",
         label:
           "Lleva un registro de tus paquetes de donde vienen y a donde han sido reubicados.",
-        href: "#"
+        href: "/records/general",
       },
       {
         title: "Mapa de bodega",
         img: "images/map.jpg",
         label:
           "Ubicación de tu paqueteria dentro de la bodega. Visualiza tus paquetes en donde estan ubicados de manera gráfica.",
-        href: "#"
+        href: "#",
       },
       {
         title: "Mover paquetes",
         img: "images/move-package.jpg",
         label: "Reubica los paquetes que han sido ingresados en bodega.",
-        href: "#"
-      }
-    ]
-  })
+        href: "#",
+      },
+    ],
+  }),
 };
 </script>
 
