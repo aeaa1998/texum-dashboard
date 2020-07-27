@@ -14,9 +14,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/clients/{id}', 'ClientController@show');
     Route::put('/client/{id}', 'ClientController@update');
     Route::delete('/client/{id}', 'ClientController@delete');
+
     Route::get('/profiles', 'ProfileController@index');
 
-    Route::get('/roles', 'RoleController@index');
+    Route::get('/lots','LotsController@index');
+    Route::get('/lots/{id}','LotsController@show');
+    Route::post('lots','LotsController@create');
+    Route::put('lot/{id}','LotsController@update');
+    Route::delete('lot/{id}','LotsController@delete');
+
+    Route::get('/roles','RoleController@index');
     Route::get('/roles/{id}', 'RoleController@show');
     Route::put('/roles/{id}', 'RoleController@update');
     Route::delete('/roles/{id}', 'RoleController@delete');
