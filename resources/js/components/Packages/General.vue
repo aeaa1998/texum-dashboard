@@ -305,6 +305,7 @@ export default {
     row() {
       this.fetchPage(undefined, 1);
     },
+    selected(value, oldValue) {},
   },
   computed: {
     selectedPackageStatusIcon() {

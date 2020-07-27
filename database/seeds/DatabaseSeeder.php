@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(PackageStatusesSeeder::class);
         $this->call(PackageSeeder::class);
+        $this->call(RequestStatusTableSeeder::class);
         Schema::enableForeignKeyConstraints();
     }
 }
