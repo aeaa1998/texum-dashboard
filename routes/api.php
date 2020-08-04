@@ -41,4 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/requests','RequestsController@index');
     Route::get('/request/{id}','RequestsController@show');
+    Route::post('/requests','RequestsController@create');
+    Route::put('/requests/{id}','RequestsController@update');
+    Route::delete('/requests/{id}','RequestsController@delete');
 });
