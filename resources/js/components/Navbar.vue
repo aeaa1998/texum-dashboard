@@ -74,8 +74,8 @@ export default {
       }
     ],
     accountItems: [
-      { title: "Perfil de usuario", action: "/" },
-      { title: "Ajustes", action: "/" },
+      { title: "Perfil de usuario", action: "/profile" },
+      { title: "Ajustes", action: "/workers-table" },
       { title: "Cerrar sesión", action: "/logout" }
     ]
   }),

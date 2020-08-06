@@ -12,8 +12,8 @@ class ProfileController extends Controller
     // Obtener todos los perfiles
     public function index()
     {
-        $users = User::all();
-        return response()->json($users);
+        $users = User::with('worker')->find(Auth::user()->id);
+        return view('dashboard.profile')->with(['profile' => json_encode($users)]);
     }
 
     // Obtener un perfil
@@ -26,5 +26,6 @@ class ProfileController extends Controller
     // Actualizar un perfil
     public function update(Request $request, $id)
     {
+    
     }
 }

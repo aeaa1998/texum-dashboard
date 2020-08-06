@@ -29,6 +29,8 @@ Vue.component('mainmenu', require('./components/MainMenu.vue').default);
 Vue.component('navbar', require('./components/Navbar.vue').default);
 Vue.component('package-general', require('./components/Packages/General.vue').default);
 Vue.component('records-general', require('./components/Records/General.vue').default);
+Vue.component('profile', require('./components/Profile.vue').default);
+Vue.component('workers-table', require('./components/WorkersTable.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
