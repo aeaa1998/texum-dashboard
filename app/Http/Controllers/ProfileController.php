@@ -13,7 +13,7 @@ class ProfileController extends Controller
     public function index()
     {
         $users = User::with('worker')->find(Auth::user()->id);
-        return view('dashboard.profile')->with(['profile' => json_encode($users)]);
+        return view('dashboard.profile')->with(['profile' => $users]);
     }
 
     // Obtener un perfil
