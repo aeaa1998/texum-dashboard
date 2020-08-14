@@ -44,4 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/requests','RequestsController@create');
     Route::put('/requests/{id}','RequestsController@update');
     Route::delete('/requests/{id}','RequestsController@delete');
+    
+    Route::put('/user/{user_id}/password','UserPasswordController@update');
+    //Route::get('/user/{user_id}/password', 'UserPasswordController@index');
 });
