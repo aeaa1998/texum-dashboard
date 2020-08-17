@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Worker;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,6 +19,7 @@ class Controller extends BaseController
 {
     public function index()
     {
+        #if (Gate::forUser($user)->allows('view-packages')) {
         $payload = Package::with([
             'lot.client', 'status',
             'lastRecord.newLocker'
@@ -92,5 +94,6 @@ class Controller extends BaseController
                 'columns' => $columns,
             ]);
         }
+        #}
     }
 }

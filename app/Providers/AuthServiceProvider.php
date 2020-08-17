@@ -2,6 +2,7 @@
 namespace App\Providers;
 use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\Gate;
+use App\Models\UserRole;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 class AuthServiceProvider extends ServiceProvider
 {
@@ -22,5 +23,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Passport::routes();
+
+        Gate::define('view-packages', function ($user) {
+            $user_id = $user->id;
+            $userAccess = UserRole::where('user_id',$user_id)->value('role_id');
+            return $userAccess === 2;
+        });
     }
 }
