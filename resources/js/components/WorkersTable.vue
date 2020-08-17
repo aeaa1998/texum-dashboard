@@ -10,23 +10,28 @@
           Tabla de trabajadores
           <v-spacer></v-spacer>
           <v-text-field
-            v-model="search"
             append-icon="mdi-magnify"
             label="Búsqueda detallada"
+            v-model="search"
+            search="search"
             single-line
             hide-details></v-text-field>
         </v-card-title>
         <v-data-table
           :headers="headers"
-          hide-default-footer>
+          :items="workerstable"
+          :search="search"
+          >
+          <!-- hide-default-footer agregar con el pagination -->
         </v-data-table>
         <div>
-          <v-pagination
+          <!-- <v-pagination
             v-model="currentPage"
+            :length="pageTotal"
             :total-visible="10"
             circle>
 
-          </v-pagination>
+          </v-pagination> -->
         </div>
       </v-card>
     </v-container>
@@ -38,17 +43,28 @@
 <script>
 import axios from "axios"
 export default {
-  
+  props: ["workerstable"],
   data: () => ({
     headers: [
-    {text: 'Nombre', align: 'center', value: 'nombre'},
-    {text: 'Apellido', align: 'center', value: 'apellido'},
-    {text: 'Correo', align: 'center', value: 'correo'},
-    {text: 'Cargo', align: 'center', value: 'cargo'}
+    // {align: 'center', text: 'Id', value: 'id'},
+    {align: 'center', text: 'Nombre', value: 'first_name'},
+    {align: 'center', text: 'Apellido', value: 'last_name'},
+    {align: 'center', text: 'Creado', value: 'created_at'},
     ],
     isLoading: true,
     currentPage: 1,
+    pageTotal:1,
+    workers: [],
+    clients: {},
+    search: '',
   }),
+
+  beforeMount() {
+    // this.currentPage = this.workerstable.current_page;
+    // this.pageTotal = this.workerstable.last_page;
+    this.workers = this.workerstable.data
+    console.log(this.workerstable)
+  }
   
   
 }

@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
 
 @section('nav-content')
-<workers-table />
+<workers-table :workerstable="{{ $workerstable }}"/>
 @endsection

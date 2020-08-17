@@ -12,7 +12,7 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::all();
-        return view('dashboard.workerstable')->with(['workers-table' => json_encode($clients)]);
+        return response()->json($clients);
     }
     // Obtener cliente por id
     public function show($id)

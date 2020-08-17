@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/packages/general', 'Packages\Controller@index');
     Route::get('/records/general', 'Records\Controller@index');
     Route::get('/profile', 'ProfileController@index')->name('profile');
-    Route::get('/workers-table', 'ClientController@index');
+    Route::post('/profile', 'ProfileController@index')->name('profile');
+    Route::get('/workers-table', 'WorkerController@index');
     Route::get('logout', 'AuthController@logout');
 });
