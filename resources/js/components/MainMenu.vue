@@ -27,7 +27,7 @@ export default {
   data: () => ({
     menuOptions: [
       {
-        title: "Busqueda Avanzada",
+        title: "Paqueteria",
         img: "images/texum-logo.jpeg",
         label: "Busqueda de la paqueteria con críterios más especificos.",
         href: "/packages/general",
@@ -47,10 +47,10 @@ export default {
         href: "#",
       },
       {
-        title: "Mover paquetes",
+        title: "Solicitudes de paquetes",
         img: "images/move-package.jpg",
         label: "Reubica los paquetes que han sido ingresados en bodega.",
-        href: "#",
+        href: "/requests/general",
       },
     ],
   }),

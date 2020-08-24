@@ -123,7 +123,7 @@
                         clearable
                         v-model="newColumn"
                         :items="columns"
-                        label="Column del rack"
+                        label="Columna del rack"
                       >
                         <template v-slot:no-data>
                           <div
@@ -155,7 +155,7 @@
                         clearable
                         v-model="oldColumn"
                         :items="columns"
-                        label="Column del rack"
+                        label="Columna del rack"
                       >
                         <template v-slot:no-data>
                           <div
@@ -419,7 +419,7 @@ export default {
     newLetter() {
       this.fetchPage(undefined, 1);
     },
-    old_column() {
+    oldColumn() {
       this.fetchPage(undefined, 1);
     },
     newColumn() {

@@ -23,7 +23,18 @@ Route::middleware(['guest'])->group(function () {
 });
 Route::group(['middleware' => 'auth'], function () {
     Route::view('/home', 'dashboard.main');
-    Route::get('/packages/general', 'Packages\Controller@index');
+    Route::prefix("packages")->group(function () {
+        Route::get('/general', 'Packages\Controller@index');
+        Route::post('/', 'Packages\Controller@store');
+        Route::put('/{package_id}', 'Packages\Controller@update');
+        Route::get('/by/locker', 'Packages\Controller@packagesByLocker');
+    });
+    Route::prefix("requests")->group(function () {
+        Route::get('/general', 'Requests\Controller@index');
+        Route::post('/', 'Requests\Controller@store');
+        Route::put('/{request_id}', 'Requests\Controller@update');
+    });
+
     Route::get('/records/general', 'Records\Controller@index');
     Route::get('logout', 'AuthController@logout');
 });

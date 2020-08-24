@@ -9,11 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    // Obtener todos los perfiles
     public function index()
     {
-        $users = User::all();
-        return response()->json($users);
+        $user = User::with('worker')->find(Auth::user()->id);
+        return view('la vista del profile')->json(['profile' => $user]);
     }
 
     // Obtener un perfil

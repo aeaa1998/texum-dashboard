@@ -10,6 +10,11 @@ class Package extends Model
     {
         return $this->hasMany('App\Models\Record');
     }
+
+    function requests()
+    {
+        return $this->hasMany('App\Models\PackageRequest');
+    }
     function lastRecord()
     {
         return $this->hasOne('App\Models\Record')->orderByDesc('id');
