@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lot;
+use App\Models\Package;
 
 class LotsController extends Controller
 {
@@ -38,4 +39,17 @@ class LotsController extends Controller
         $lot->delete();
         return response()->json($lot);
     }
+
+  #  public function deliverLot(Request $request, $id)
+   # {
+    #    $lot=Lot::find($id);
+     #   $packages = Package::with(['lot.package'])
+      #      ->whereHas('lot.package', function ($query) use ($id) {
+       #         $query->where('lot_id', $id);
+        #    })
+        #    ->get();
+       # return response()->json(['packages' => $packages]);
+        //return response()->json($lot);
+    #}
+    
 }

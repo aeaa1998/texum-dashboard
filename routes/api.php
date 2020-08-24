@@ -16,6 +16,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/client/{id}', 'ClientController@delete');
 
     Route::get('/profiles', 'ProfileController@index');
+    //Route::get('/profiles/{id}','ProfileController@show');
+    //Route::put('/profile/{id}','ProfileController@update');
 
     Route::get('/lots','LotsController@index');
     Route::get('/lots/{id}','LotsController@show');
@@ -37,6 +39,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/records/{worker_id}', 'RecordsController@getRecordsByUserId');
 
-    //Route::get('/profiles/{id}','ProfileController@show');
-    //Route::put('/profile/{id}','ProfileController@update');
+    Route::get('/requests','RequestsController@index');
+    Route::get('/request/{id}','RequestsController@show');
+    Route::post('/requests','RequestsController@create');
+    Route::put('/requests/{id}','RequestsController@update');
+    Route::delete('/requests/{id}','RequestsController@delete');
+
+    Route::put('/user/{user_id}/password','UserPasswordController@update');
+    //Route::get('/user/{user_id}/password', 'UserPasswordController@index');
+
+    #Route::get('/lots/{id}/deliver', 'LotsController@deliverLot');
 });

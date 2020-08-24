@@ -1,5 +1,5 @@
 <template>
-  <div class="vh-100 tikal-wallpaper">
+  <div class="h-auto tikal-wallpaper">
     <v-alert
       class="w-50 position-relative s-alert"
       :type="alertDetails.type"

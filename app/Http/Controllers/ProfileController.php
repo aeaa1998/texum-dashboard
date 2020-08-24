@@ -11,8 +11,9 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $user = User::with('worker')->find(Auth::user()->id);
-        return view('la vista del profile')->json(['profile' => $user]);
+
+        $users = User::with('worker')->find(Auth::user()->id);
+        return view('dashboard.profile')->with(['profile' => $users]);
     }
 
     // Obtener un perfil
