@@ -10,6 +10,11 @@ use App\Models\RequestStatus;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Worker;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 
 class Controller extends BaseController
 {

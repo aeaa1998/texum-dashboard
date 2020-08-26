@@ -29,5 +29,13 @@ class AuthServiceProvider extends ServiceProvider
             $userAccess = UserRole::where('user_id',$user_id)->value('role_id');
             return $userAccess === 2;
         });
+        Gate::define('edit-settings', function ($user) {
+            $userAccess = UserRole::where('user_id',$user_id)->value('role_id');
+            return $user->isAdmin;
+        });
+    
+        Gate::define('update-post', function ($user, $post) {
+            return $user->id === $post->user_id;
+        });
     }
 }
