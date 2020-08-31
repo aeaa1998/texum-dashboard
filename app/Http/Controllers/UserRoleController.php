@@ -39,13 +39,15 @@ class UserRoleController extends Controller
     }
 
 
-    /*public function create(Request $request)
+    /*public function create(Request $request, $userId)
     {
-        $userrole = new UserRole();
-        $userrole->user_id = $request->user_id;
-        $userrole->role_id = $request->role_id;
-        $userrole->save();
-        return response()->json($userrole);
+        $user = User::find($userId);
+
+        collect($request->roles)->map(function ($roleId) use ($user) {
+            $user->roles()->attach($roleId);
+        })
+        $user->refresh();
+        return response()->json($user);
     }
     */
 
