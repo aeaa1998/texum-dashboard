@@ -71,6 +71,16 @@ export default {
         icon: "mdi-home",
         title: "Home",
         href: "/home"
+      },
+      {
+        icon: "mdi-package-variant-closed",
+        title: "Paquetería",
+        href: "/packages/general"
+      },
+      {
+        icon: "mdi-file-multiple",
+        title: "Historial",
+        href: "/records/general"
       }
     ],
     accountItems: [
