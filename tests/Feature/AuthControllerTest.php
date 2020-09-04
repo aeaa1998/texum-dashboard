@@ -9,24 +9,11 @@ use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
-    public function testLogin() {
-
-        $user = factory(User::class)->create();
-
-        // HTTP TEST
-        //$response = $this->actingAs($user)->assertsOk();
-        //$response = $this->actingAs($user)
-        //                  ->withSession(['email' => 'cschneider@hammes.org',
-        //                                'password' => '123456'])
-        //                    ->get('/login');
-
-        //APPLICATION TEST
-        //$this->actingAs($user)
-        //      ->withSession(['email' => 'cschneider@hammes.org',
-        //                     'password' => '123456'])
-        //      ->visit('login')
-        //      ->see();
+    public function testRegister() {
+        $response = $this->postJson('api/register',['first_name' => 'Pedro',
+                                                    'last_name' => 'Rodriguez',
+                                                    'email' => 'example@ex.com',
+                                                    'password' => '123456']);
+        $response->assertStatus(200)->assertJson(["message", "successfully created"]);        
     }
 }
