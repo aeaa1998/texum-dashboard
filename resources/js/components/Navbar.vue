@@ -81,12 +81,22 @@ export default {
         icon: "mdi-file-multiple",
         title: "Historial",
         href: "/records/general"
+      },
+      {
+        icon: "mdi-account-group",
+        title: "Tabla trabajadores",
+        href: "/workers-table"
+      },
+      {
+        icon: "mdi-account-cog",
+        title: "Roles Trabajadores",
+        href: "/roles"
       }
     ],
     accountItems: [
       { title: "Perfil de usuario", action: "/profile" },
-      { title: "Ajustes", action: "/workers-table" },
-      { title: "Cerrar sesión", action: "/roles" }
+      { title: "Ajustes", action: "#" },
+      { title: "Cerrar sesión", action: "/logout" }
     ]
   }),
   beforeMount() {

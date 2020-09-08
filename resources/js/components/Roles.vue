@@ -3,7 +3,7 @@
     <v-container>
       <v-card>
         <v-card-title>
-          CRUD Roles
+          Roles de los trabajadores
           <v-spacer></v-spacer>
           <v-text-field
             append-icon="mdi-magnify"
