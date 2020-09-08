@@ -12,7 +12,7 @@ class UserRoleController extends Controller
     public function index()
     {
         $users = User::with('roles')->get();
-        return response()->json(['users' => $users]);
+        return view('dashboard.roles')->with(['roles' => $users]);
     }
 
 

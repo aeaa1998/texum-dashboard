@@ -34,6 +34,7 @@ Vue.component('requests-general', require('./components/Requests/General.vue').d
 
 Vue.component('profile', require('./components/Profile.vue').default);
 Vue.component('workers-table', require('./components/WorkersTable.vue').default);
+Vue.component('roles', require('./components/Roles.vue').default);
 
 
 /**

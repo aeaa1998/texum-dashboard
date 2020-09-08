@@ -39,5 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::post('/profile', 'ProfileController@index')->name('profile');
     Route::get('/workers-table', 'WorkerController@index');
+    Route::get('/roles', 'UserRoleController@index')->name('roles');
     Route::get('logout', 'AuthController@logout');
+    
 });
