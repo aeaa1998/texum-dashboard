@@ -185,11 +185,11 @@
                 :items="records"
                 hide-default-footer
               >
-                <template v-slot:item.actions="{ item }">
+                <!-- <template v-slot:item.actions="{ item }">
                   <v-btn icon @click="navigateToDetail(item)">
                     <v-icon>mdi-eye</v-icon>
                   </v-btn>
-                </template>
+                </template>-->
                 <template
                   v-slot:item.created_at="{ item }"
                 >{{moment(item.created_at).locale('es').format('ll')}}</template>
@@ -302,7 +302,7 @@ export default {
         value: "newLocker",
       },
       { align: "center", text: "Fecha", value: "created_at" },
-      { align: "center", text: "Acciones", value: "actions" },
+      // { align: "center", text: "Acciones", value: "actions" },
     ],
     currentPage: 1,
     pageTotal: 1,

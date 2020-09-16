@@ -40,11 +40,11 @@ export default {
         href: "/records/general",
       },
       {
-        title: "Mapa de bodega",
-        img: "images/map.jpg",
+        title: "Trabajadores",
+        img: "images/workers-bg.png",
         label:
-          "Ubicación de tu paqueteria dentro de la bodega. Visualiza tus paquetes en donde estan ubicados de manera gráfica.",
-        href: "#",
+          "Manten el control de tus usuarios. Acepta y rechaza futuros usuarios.",
+        href: "/workers",
       },
       {
         title: "Solicitudes de paquetes",
