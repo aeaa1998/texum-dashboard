@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Worker;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\WelcomeEmail;
 
 class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        $request->validate([
+        $msg = $request->validate([
             'email'      => 'required|email|unique:App\Models\User,email',
             'password'   => 'required',
             'first_name' => 'required',
@@ -30,6 +32,7 @@ class AuthController extends Controller
         // $user->worker()->save($worker);
         $worker->save();
 
+        Mail::to($request->email)->queue(new WelcomeEmail($msg));
         return response()->json(["message", "successfully created"]);
     }
 

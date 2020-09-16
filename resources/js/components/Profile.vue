@@ -73,7 +73,7 @@
                     <v-col cols="12">
                       <v-text-field
                         v-model="profile.worker.first_name"
-                        :rules="[inputRules.required, inputRules.min(2)]"
+                        :rules="[inputRules.required, inputRules.min(1)]"
                         label="Nombre">
                       </v-text-field>
                     </v-col>

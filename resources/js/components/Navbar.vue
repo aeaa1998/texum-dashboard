@@ -71,11 +71,31 @@ export default {
         icon: "mdi-home",
         title: "Home",
         href: "/home"
+      },
+      {
+        icon: "mdi-package-variant-closed",
+        title: "Paquetería",
+        href: "/packages/general"
+      },
+      {
+        icon: "mdi-file-multiple",
+        title: "Historial",
+        href: "/records/general"
+      },
+      {
+        icon: "mdi-account-group",
+        title: "Tabla trabajadores",
+        href: "/workers-table"
+      },
+      {
+        icon: "mdi-account-cog",
+        title: "Roles Trabajadores",
+        href: "/roles"
       }
     ],
     accountItems: [
       { title: "Perfil de usuario", action: "/profile" },
-      { title: "Ajustes", action: "/workers-table" },
+      { title: "Ajustes", action: "#" },
       { title: "Cerrar sesión", action: "/logout" }
     ]
   }),
