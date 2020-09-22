@@ -33,12 +33,11 @@ Vue.component('records-general', require('./components/Records/General.vue').def
 Vue.component('requests-general', require('./components/Requests/General.vue').default);
 
 Vue.component('profile', require('./components/Profile.vue').default);
-<<<<<<< HEAD
+
 Vue.component('workers', require('./components/Workers.vue').default);
-=======
-Vue.component('workers-table', require('./components/WorkersTable.vue').default);
+
 Vue.component('roles', require('./components/Roles.vue').default);
->>>>>>> e6a69a7f25d56e6267f68dd03ff92c3ccb127848
+
 
 
 /**
