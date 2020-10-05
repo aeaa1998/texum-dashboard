@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
 
 @section('nav-content')
-<roles :roles="{{ $roles }}" />
+<roles :roles="{{ $role }}" />
 @endsection
