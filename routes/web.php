@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/profile', 'ProfileController@index')->name('profile');
 
     Route::get('/workers', 'WorkerController@index');
+    Route::get('/workers/{user_id}/profile', 'WorkerController@show')->name('user');
     Route::post('/workers/{user_id}/accept', 'WorkerController@processWorker');
 
     Route::get('/roles', 'UserRoleController@index')->name('roles');
