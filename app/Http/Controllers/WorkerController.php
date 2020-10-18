@@ -67,6 +67,15 @@ class WorkerController extends Controller
     return view('dashboard.workers')->with(['payload' => json_encode($payload)]);
   }
 
+  public function show($id) {
+    $user = User::with('worker')->find($id);
+    //return response()->json($user);
+    /* if (!$users) {
+      return \Redirect::back()->with('flash_error', '!No se ha encontrado el trabajador!');
+    } */
+    return view('dashboard.workersprofile')->with(['user' => $user]);
+  }
+
   public function processWorker(Request $request, $userId)
   {
     $request->validate([

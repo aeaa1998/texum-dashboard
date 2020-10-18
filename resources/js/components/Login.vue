@@ -22,6 +22,7 @@
           <v-card-text>
             <v-text-field
               v-model="email"
+              name="email"
               validate-on-blur
               :rules="[rules.required, rules.email]"
               label="Correo electronico"
@@ -29,6 +30,7 @@
             ></v-text-field>
             <v-text-field
               v-model="password"
+              name="password"
               :rules="[rules.required]"
               label="Contraseña"
               type="password"
@@ -36,7 +38,7 @@
             ></v-text-field>
           </v-card-text>
           <v-card-actions>
-            <v-btn :disabled="!validLoginform" text color="accent-4" @click="login">Ingresar</v-btn>
+            <v-btn dusk="login-button" :disabled="!validLoginform" text color="accent-4" @click="login">Ingresar</v-btn>
             <v-btn text color="accent-4" href="/register">Registrarse</v-btn>
           </v-card-actions>
         </v-form>
@@ -53,7 +55,7 @@ export default {
         show: false,
         message: "",
         type: "success"
-      },
+      }, 
       email: "",
       password: "",
       validLoginform: true,

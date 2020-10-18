@@ -1,5 +1,5 @@
 <template>
-  <div class="h-auto tikal-wallpaper">
+  <div class="vh-100 tikal-wallpaper">
     <v-alert
       class="w-50 position-relative s-alert"
       :type="alertDetails.type"
@@ -25,6 +25,7 @@
                 <v-text-field
                   :rules="[registerRules.required]"
                   dense
+                  name="firstName"
                   v-model="firstName"
                   label="Primer Nombre"
                   required
@@ -34,6 +35,7 @@
                 <v-text-field
                   :rules="[registerRules.required]"
                   dense
+                  name="lastName"
                   v-model="lastName"
                   label="Primer Apellido"
                   required
@@ -44,6 +46,7 @@
                   :rules="[registerRules.required, registerRules.email]"
                   dense
                   validate-on-blur
+                  name="email"
                   v-model="email"
                   label="Correo electronico"
                   required
@@ -53,6 +56,7 @@
                 <v-text-field
                   :rules="[registerRules.required, registerRules.counter]"
                   dense
+                  name="password"
                   v-model="password"
                   label="Contraseña"
                   type="password"
@@ -61,6 +65,7 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field
+                name="passwordConfirmation"
                   v-model="passwordConfirmation"
                   :rules="[registerRules.required, passwordMatchRule, registerRules.counter]"
                   label="Confirmar contraseña"
@@ -71,7 +76,7 @@
             </v-row>
           </v-card-text>
           <v-card-actions>
-            <v-btn :disabled="!validForm" @click="registerUser" text color="accent-4">Crear Cuenta</v-btn>
+            <v-btn dusk="register-button" :disabled="!validForm" @click="registerUser" text color="accent-4">Crear Cuenta</v-btn>
             <a class="ml-3 uk-link-muted" href="/">Ya tienes usuario? Inicia sesión</a>
           </v-card-actions>
         </v-form>

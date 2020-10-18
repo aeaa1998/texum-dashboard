@@ -11,8 +11,8 @@ class UserRoleController extends Controller
     //INDEX, SHOW, CREATE, UPDATE, DELETE
     public function index()
     {
-        $users = User::with('roles')->get();
-        return view('dashboard.roles')->with(['roles' => $users]);
+        $users = User::with('role')->get();
+        return view('dashboard.roles')->with(['role' => $users]);
     }
 
 

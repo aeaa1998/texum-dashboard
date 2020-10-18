@@ -32,7 +32,7 @@ class AuthController extends Controller
         // $user->worker()->save($worker);
         $worker->save();
 
-        Mail::to($request->email)->queue(new WelcomeEmail($msg));
+        // Mail::to($request->email)->queue(new WelcomeEmail($msg));
         return response()->json(["message", "successfully created"]);
     }
 
