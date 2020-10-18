@@ -38,13 +38,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/records/general', 'Records\Controller@index');
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::post('/profile', 'ProfileController@index')->name('profile');
-<<<<<<< HEAD
+
     Route::get('/workers', 'WorkerController@index');
     Route::post('/workers/{user_id}/accept', 'WorkerController@processWorker');
-=======
-    Route::get('/workers-table', 'WorkerController@index');
+
     Route::get('/roles', 'UserRoleController@index')->name('roles');
->>>>>>> e6a69a7f25d56e6267f68dd03ff92c3ccb127848
+
     Route::get('logout', 'AuthController@logout');
-    
 });

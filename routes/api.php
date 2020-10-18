@@ -7,7 +7,10 @@ Route::post('oauth/login', 'Auth\OAuthController@login');
 Route::post('/login', 'AuthController@login');
 Route::post('/register', 'AuthController@register');
 // });
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::group(['namespace' => 'API'], function () {
+        Route::get('/user', 'UserController@index');
+    });
     Route::get('logout', 'OAuthController@logout');
     Route::post('/clients', 'ClientController@create');
     Route::get('/clients', 'ClientController@index');
@@ -15,17 +18,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/client/{id}', 'ClientController@update');
     Route::delete('/client/{id}', 'ClientController@delete');
 
-    Route::get('/profiles', 'ProfileController@index');
+
     //Route::get('/profiles/{id}','ProfileController@show');
     //Route::put('/profile/{id}','ProfileController@update');
 
-    Route::get('/lots','LotsController@index');
-    Route::get('/lots/{id}','LotsController@show');
-    Route::post('lots','LotsController@create');
-    Route::put('lot/{id}','LotsController@update');
-    Route::delete('lot/{id}','LotsController@delete');
+    Route::get('/lots', 'LotsController@index');
+    Route::get('/lots/{id}', 'LotsController@show');
+    Route::post('lots', 'LotsController@create');
+    Route::put('lot/{id}', 'LotsController@update');
+    Route::delete('lot/{id}', 'LotsController@delete');
 
-    Route::get('/roles','RoleController@index');
+    Route::get('/roles', 'RoleController@index');
     Route::get('/roles/{id}', 'RoleController@show');
     Route::put('/roles/{id}', 'RoleController@update');
     Route::delete('/roles/{id}', 'RoleController@delete');
@@ -39,13 +42,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/records/{worker_id}', 'RecordsController@getRecordsByUserId');
 
-    Route::get('/requests','RequestsController@index');
-    Route::get('/request/{id}','RequestsController@show');
-    Route::post('/requests','RequestsController@create');
-    Route::put('/requests/{id}','RequestsController@update');
-    Route::delete('/requests/{id}','RequestsController@delete');
+    Route::get('/requests', 'RequestsController@index');
+    Route::get('/request/{id}', 'RequestsController@show');
+    Route::post('/requests', 'RequestsController@create');
+    Route::put('/requests/{id}', 'RequestsController@update');
+    Route::delete('/requests/{id}', 'RequestsController@delete');
 
-    Route::put('/user/{user_id}/password','UserPasswordController@update');
+    Route::put('/user/{user_id}/password', 'UserPasswordController@update');
     //Route::get('/user/{user_id}/password', 'UserPasswordController@index');
 
     #Route::get('/lots/{id}/deliver', 'LotsController@deliverLot');
