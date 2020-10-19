@@ -171,18 +171,17 @@ export default {
   },
   beforeMount() {
     this.editedProfile = {...this.profile}
-    // console.log(this.editedProfile)
-    // console.log(this.profile)
   },
   methods: {
     editProfile() {
-      console.log(this.editedProfile)
       axios
-        .post("/profile", {
-          ...this.editedProfile,
+        .put("/profiles", {
+          first_name: this.profile.worker.first_name,
+          last_name: this.profile.worker.last_name,
+          email: this.profile.email
         })
         .then(response => {
-          console.log(response)
+          //console.log(response)
           this.alertDetails.show = true;
           this.alertDetails.type = "success";
           this.alertDetails.message = "Se han realizado los cambios con éxito";
@@ -202,29 +201,28 @@ export default {
     },
     editPassword() {
       axios
-        .post("/profile", {
-          password: this.newPassword,
-          password_confirmation: this.passwordConfirm
-        })
-        .then(response => {
-          console.log(response)
-          this.alertDetails.show = true;
-          this.alertDetails.type = "success";
-          this.alertDetails.message = "Se han realizado el cambio con éxito";
-          setTimeout(() => {
+      .put("/profile/password", {
+        password: this.newPassword
+      })
+      .then(response => {
+        console.log(response)
+        this.alertDetails.show = true;
+        this.alertDetails.type = "success";
+        this.alertDetails.message = "Se han realizado el cambio con éxito";
+        setTimeout(() => {
+        this.alertDetails.show = false;
+        }, 3000);
+      })
+      .catch(e => {
+        this.alertDetails.show = true;
+        this.alertDetails.type = "error";
+        this.alertDetails.message = "La contraseña no se logro cambiar";
+        setTimeout(() => {
           this.alertDetails.show = false;
-          }, 3000);
-        })
-        .catch(e => {
-          this.alertDetails.show = true;
-          this.alertDetails.type = "error";
-          this.alertDetails.message = "La contraseña no se logro cambiar";
-          setTimeout(() => {
-            this.alertDetails.show = false;
-          }, 3000);
-          console.log(e)
-        });
-    }
+        }, 3000);
+        console.log(e)
+      });
+    }   
   },
   computed: {
     passwordMatchRule() {

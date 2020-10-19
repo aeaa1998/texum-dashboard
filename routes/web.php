@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/records/general', 'Records\Controller@index');
     Route::get('/profile', 'ProfileController@index')->name('profile');
     Route::post('/profile', 'ProfileController@index')->name('profile');
+    Route::put('/profiles','ProfileController@updateCredentials');
+    Route::put('/profile/password','ProfileController@updatePassword');
 
     Route::get('/workers', 'WorkerController@index');
     Route::get('/workers/{user_id}/profile', 'WorkerController@show')->name('user');
