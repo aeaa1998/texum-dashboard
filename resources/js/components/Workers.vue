@@ -160,6 +160,7 @@
                 <v-card class="w-100" outlined elevation="6">
                   <v-tabs v-model="currentTab">
                     <v-tab>Información</v-tab>
+                    <v-tab>Editar</v-tab>
                     <v-tab-item>
                       <v-card-text>
                         <v-row>
@@ -191,6 +192,21 @@
                         </v-row>
                       </v-card-text>
                     </v-tab-item>
+                    <!-- <v-tab-item>
+                      <v-card-text>
+                        <v-row>
+                          <v-col cols="12">
+                            <h4>Rol de Usuario</h4>
+                            //ROL DE USUARIO
+                            <v-text-field :value="selected.first_name" readonly autofocus></v-text-field>
+                          </v-col>
+                          <v-col cols="12" md="4">
+                            <h4>Fecha Verificacion</h4>
+                            <v-text-field :value="selected.verified_at" readonly autofocus></v-text-field>
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
+                    </v-tab-item> -->
                   </v-tabs>
                 </v-card>
               </h2>

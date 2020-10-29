@@ -80,7 +80,7 @@ export default {
           this.alertDetails.show = true;
           this.alertDetails.type = "success";
           this.alertDetails.message =
-            "Se ha registrado con exito. Por favor espera mientras te redirigimos.";
+            "Se ha ingresado con éxito. Por favor espera mientras te redirigimos.";
           setTimeout(() => {
             this.alertDetails.show = false;
           }, 3000);
