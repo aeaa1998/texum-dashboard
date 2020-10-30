@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/workers/{user_id}/accept', 'WorkerController@processWorker');
 
     Route::get('/roles', 'UserRoleController@index')->name('roles');
+    //Route::put('/roles/{userId}',"UserRoleController@update");
 
     Route::get('logout', 'AuthController@logout');
     
