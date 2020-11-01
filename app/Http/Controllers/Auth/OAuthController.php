@@ -16,7 +16,6 @@ class OAuthController extends AccessTokenController
     public function login(ServerRequestInterface $request)
     {
         try {
-
             $tokenResponse = parent::issueToken($request);
 
             $token = $tokenResponse->getContent();
@@ -26,7 +25,8 @@ class OAuthController extends AccessTokenController
             }
             $request = $request->getParsedBody();
             $email = $request['username'];
-            $user     = User::where('email', $email)->first();
+            $user = User::where('email', $email)->first();
+            $verification = $user->verified_at;
             $tokenInfo = collect($tokenInfo);
             $tokenInfo->put('user', $user);
             return $tokenInfo;

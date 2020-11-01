@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Record;
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
 use App\Models\Worker;
 use Carbon\Carbon;
@@ -89,6 +90,7 @@ class WorkerController extends Controller
     } else {
       Worker::where('user_id', $userId)->delete();
       Record::where('user_id', $userId)->delete();
+      UserRole::where('user_id', $userId)->delete();
       $user->delete();
       return response()->json(['message' => 'Se rechazo el usuario de manera correcta']);
     }

@@ -160,6 +160,7 @@
                 <v-card class="w-100" outlined elevation="6">
                   <v-tabs v-model="currentTab">
                     <v-tab>Información</v-tab>
+                    <v-tab>Editar</v-tab>
                     <v-tab-item>
                       <v-card-text>
                         <v-row>
@@ -191,6 +192,21 @@
                         </v-row>
                       </v-card-text>
                     </v-tab-item>
+                    <v-tab-item>
+                      <v-card-text>
+                        <v-row>
+                          <!-- <v-col cols="12">
+                            <v-text-field
+                              v-model="newRole"
+                              label="Nuevo Rol"
+                            </v-text-field>
+                          </v-col>
+                          <v-col class="text-right">
+                            <v-btn :disabled="!valid" @click="editWorkerRole" align="right">Editar</v-btn>
+                          </v-col> -->
+                        </v-row>
+                      </v-card-text>
+                    </v-tab-item>
                   </v-tabs>
                 </v-card>
               </h2>
@@ -211,11 +227,17 @@ export default {
     moment: moment,
     currentWindow: 1,
     currentTab: 0,
+    alertDetails: {
+      show: false,
+      message: "",
+      type: "success"
+    },
     snackbar: {
       show: false,
       text: "",
       color: "success",
     },
+    newRole: "",
     menus: {
       from: false,
       to: false,
@@ -245,10 +267,6 @@ export default {
       lastName: null,
     },
     search: "",
-    Nombre: "Javier",
-    Apellido: "Ramirez",
-    Email: "ram18099@uvg.edu.gt",
-    Fecha: "21-10-2020",
   }),
   beforeMount() {
     this.pagination = this.payload;
@@ -321,11 +339,36 @@ export default {
     },
     navigateToDetail(selected) {
       this.selected = selected;
+      console.log(this.payload.worker);
       this.editSelect = { ...selected };
       this.currentWindow += 1;
       this.currentTab = 0;
     }
   },
+  // editWorkerRole() {
+  // axios
+  //   .put(`/roles/${this.selected.id}`, {
+  //     roles: this.newRole,
+  //   })
+  //   .then(response => {
+  //     console.log(response)
+  //     this.alertDetails.show = true;
+  //     this.alertDetails.type = "success";
+  //     this.alertDetails.message = "Se han realizado el cambio con éxito";
+  //     setTimeout(() => {
+  //       this.alertDetails.show = false;
+  //     }, 3000);
+  //   })
+  //   .catch(e => {
+  //     this.alertDetails.show = true;
+  //     this.alertDetails.type = "error";
+  //     this.alertDetails.message = "El rol no se ha podido cambiar";
+  //     setTimeout(() => {
+  //       this.alertDetails.show = false;
+  //     }, 3000);
+  //     console.log(e)
+  //     });
+  // },
   watch: {
     searchModel: {
       handler: function (val, oldVal) {

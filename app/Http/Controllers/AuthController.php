@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Worker;
+use App\Models\UserRole;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\WelcomeEmail;
 
@@ -31,7 +32,10 @@ class AuthController extends Controller
         $worker->user_id    = $user->id;
         // $user->worker()->save($worker);
         $worker->save();
-
+        $userRole = new UserRole();
+        $userRole->user_id = $user->id;
+        $userRole->role_id = 1;
+        $userRole->save();
         // Mail::to($request->email)->queue(new WelcomeEmail($msg));
         return response()->json(["message", "successfully created"]);
     }
@@ -41,8 +45,14 @@ class AuthController extends Controller
         $userCredentials = $request->only('email', 'password');
 
         if (Auth::attempt($userCredentials)) {
-            $request->session()->put('user_id', User::where('email', $request->email)->first()->id);
+            $user = User::where('email', $request->email)->first();
+            $userVerification = $user->verified_at;
+            #if($userVerification == null) {
+            #return response()->json(["Not Verified"], 411);
+            // } else {
+            $request->session()->put('user_id', $user->id);
             return response()->json(["Authenticated"], 200);
+            // }
         } else {
             return response()->json(["Invalid Credentials"], 411);
         }
