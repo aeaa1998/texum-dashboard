@@ -34,14 +34,14 @@ export default {
   data: () => ({
     headers: [
     {align: 'center', text: 'id', value: 'id'},
-    {align: 'center', text: 'role id', value: 'role_id'},
+    {align: 'center', text: 'Role id', value: 'role_id'},
     {align: 'center', text: 'Email', value: 'email'},
     {align: 'center', text: 'Creado', value: 'created_at'},
+    {align: 'center', text: 'Acciones'}
     ],
     rols: [],
     search: '',
   }),
-
   beforeMount() {
     this.rols = this.roles.data
     console.log(this.roles)

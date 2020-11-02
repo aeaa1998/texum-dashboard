@@ -10,7 +10,8 @@ class LotsController extends Controller
 {
     public function index() {
         $lots = Lot::all();
-        return response()->json($lots);
+        //return response()->json($lots);
+        return view('dashboard.lots')->with(['lots' => $lots]);
     }
     public function show($id) {
         $lot = Lot::find($id);

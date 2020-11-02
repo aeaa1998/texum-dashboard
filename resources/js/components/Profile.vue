@@ -89,7 +89,7 @@
                         v-model="profile.email"
                         :rules="[inputRules.required, inputRules.email]"
                         label="Correo">
-
+                        
                       </v-text-field>
                     </v-col>
                     <v-col class="text-right">
@@ -208,7 +208,7 @@ export default {
         console.log(response)
         this.alertDetails.show = true;
         this.alertDetails.type = "success";
-        this.alertDetails.message = "Se han realizado el cambio con éxito";
+        this.alertDetails.message = "Se ha realizado el cambio con éxito";
         setTimeout(() => {
         this.alertDetails.show = false;
         }, 3000);

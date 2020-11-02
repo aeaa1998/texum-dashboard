@@ -30,7 +30,6 @@ class AuthController extends Controller
         $worker->first_name = $request->first_name;
         $worker->last_name  = $request->last_name;
         $worker->user_id    = $user->id;
-        // $user->worker()->save($worker);
         $worker->save();
         $userRole = new UserRole();
         $userRole->user_id = $user->id;
@@ -46,13 +45,14 @@ class AuthController extends Controller
 
         if (Auth::attempt($userCredentials)) {
             $user = User::where('email', $request->email)->first();
+            // CORREGIR
             $userVerification = $user->verified_at;
-            #if($userVerification == null) {
-            #return response()->json(["Not Verified"], 411);
-            // } else {
-            $request->session()->put('user_id', $user->id);
-            return response()->json(["Authenticated"], 200);
-            // }
+            if($userVerification == null) {
+                return response()->json(["Not Verified"], 411);
+            } else {
+                $request->session()->put('user_id', $user->id);
+                return response()->json(["Authenticated"], 200);
+            }
         } else {
             return response()->json(["Invalid Credentials"], 411);
         }
