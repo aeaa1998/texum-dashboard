@@ -8,7 +8,7 @@ Route::post('/login', 'AuthController@login');
 Route::post('/register', 'AuthController@register');
 // });
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('logout', 'OAuthController@logout');
+    Route::get('logout', 'Auth\OAuthController@logout');
     Route::post('/clients', 'ClientController@create');
     Route::get('/clients', 'ClientController@index');
     Route::get('/clients/{id}', 'ClientController@show');
