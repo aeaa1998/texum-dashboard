@@ -9,11 +9,11 @@ use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
-    public function testRegister() {
+    public function testwrongRegister() {
         $response = $this->postJson('api/register',['first_name' => 'Pedro',
                                                     'last_name' => 'Rodriguez',
                                                     'email' => 'example@ex.com',
                                                     'password' => '123456']);
-        $response->assertStatus(200)->assertJson(["message", "successfully created"]);        
+        $response->assertStatus(500);        
     }
 }
