@@ -95,4 +95,13 @@ class WorkerController extends Controller
       return response()->json(['message' => 'Se rechazo el usuario de manera correcta']);
     }
   }
+
+  public function delete($userId) {
+    $user = User::find($userId);
+    UserRole::where('user_id',$userId)->delete();
+    Record::where('user_id', $userId)->delete();
+    Worker::where('user_id', $userId)->delete();
+    $user->delete();
+    return response()->json($user);
+  }
 }

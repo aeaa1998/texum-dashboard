@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/workers', 'WorkerController@index');
     Route::get('/workers/{user_id}/profile', 'WorkerController@show');
     Route::post('/workers/{user_id}/accept', 'WorkerController@processWorker');
+    Route::delete('/workers/{id}','WorkerController@delete');
 
     Route::get('/roles', 'UserRoleController@index')->name('roles');
     Route::put('/roles/{userId}',"UserRoleController@update");
