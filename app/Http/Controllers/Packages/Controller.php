@@ -69,11 +69,13 @@ class Controller extends BaseController
                         });
                 });
             })
+            ->whereHas('lastRecord')
             ->paginate(10)
             ->appends(['dataOnly' => 'true']);
 
         collect($payload->items())->transform(function ($package) {
             $package->client = $package->lot->client;
+            
             $package->currentLocker = $package->lastRecord->newLocker;
             return $package;
         });

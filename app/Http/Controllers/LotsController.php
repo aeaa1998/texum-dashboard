@@ -11,6 +11,12 @@ class LotsController extends Controller
     public function index() {
         $lots = Lot::all();
         //return response()->json($lots);
+        $lots = $lots->map(function($lot){
+            $createdAt = $lot->created_at;
+            unset($lot->created_at);
+            $lot->create_date = $createdAt->format('Y-m-d h:m:s a');
+            return $lot;
+        });
         return view('dashboard.lots')->with(['lots' => $lots]);
     }
     public function show($id) {
