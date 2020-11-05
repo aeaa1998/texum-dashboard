@@ -22,6 +22,7 @@ Route::middleware(['guest'])->group(function () {
     Route::post('register', 'AuthController@register');
 });
 Route::group(['middleware' => 'auth'], function () {
+    // Route::group([], function () {
     Route::view('/home', 'dashboard.main');
     Route::prefix("packages")->group(function () {
         Route::get('/general', 'Packages\Controller@index');

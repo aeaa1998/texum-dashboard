@@ -11,7 +11,10 @@ class UserRoleController extends Controller
     //INDEX, SHOW, CREATE, UPDATE, DELETE
     public function index()
     {
-        $users = User::with('userrole')->get();
+        $users = User::with('role')->get()->map(function($i){
+            $i->create_time = $i->created_at->format("Y-m-d h:i:s a");
+            return $i;
+        });
         return view('dashboard.roles')->with(['role' => $users]);
     }
 

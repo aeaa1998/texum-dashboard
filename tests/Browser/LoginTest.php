@@ -2,71 +2,61 @@
 
 namespace Tests\Browser;
 
+use App\Models\Client;
+use App\Models\Lot;
+use App\Models\Package;
+use App\Models\User;
+use App\Models\Worker;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Faker\Factory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
+use Tests\Browser\Pages\Login;
+
 class LoginTest extends DuskTestCase
 {
+    use WithFaker, RefreshDatabase;
+    private $user, $userArray;
     /**
      * A Dusk test example.
      *
      * @return void
      */
-    public function testUnsuccessfullRegisterAndLogin()
-    {
-        $faker = Factory::create();
-        $email = $faker->email;
-        $firstName = $faker->firstName();
-        $lastName = $faker->lastName;
-        $password = 123456;
-        $this->browse(function (Browser $browser) use($email, $password, $firstName, $lastName) {
-            $browser->visit('/register')
-                    ->typeSlowly("firstName", $firstName, 10)
-                    ->typeSlowly("lastName", $lastName, 10)
-                    ->typeSlowly("email", $email, 10)
-                    ->typeSlowly("password", $password, 10)
-                    ->typeSlowly("passwordConfirmation", $password, 50)
-                    ->click('@register-button')
-                    ->pause(1500)
-                    // ->assertSee('Usuario creado con exito. Por favor espera mientras te redirigimos.')
-                    // ->pause(21234567)
-                    ->waitForLocation('/login')
-                    ->assertSee('Texsun')
-                    ->typeSlowly("email", $email, 10)
-                    ->typeSlowly("password", 'notCorrect', 10)
-                    ->click('@login-button')
-                    ->pause(3000)
-                    ->assertPathIsNot('/home');
-        });
+	public function setUp(): void{
+        parent::setUp();
+        Schema::disableForeignKeyConstraints();
+        factory(Worker::class)->create();
+        $this->user = User::first();
+        factory(Client::class, 10)->create();
+        factory(Lot::class, 10)->create();
+        Artisan::call('db:seed', ['--class' => 'LockerSeeder', '--database' => 'testing']);
+        Artisan::call('db:seed', ['--class' => 'RoleSeeder', '--database' => 'testing']);
+        Artisan::call('db:seed', ['--class' => 'PackageStatusesSeeder', '--database' => 'testing']);
+        factory(Package::class, 10)->create();
+        Artisan::call('db:seed', ['--class' => 'RequestStatusTableSeeder', '--database' => 'testing']);
+        $this->user->verified_at = Carbon::now();
+        $this->user->save();
+        Schema::enableForeignKeyConstraints();
+	}
+	/** @test */
+	public function correctLoginAndLogout() {
+		$this->browse(function (Browser $browser) {
+            $browser->visit(new Login)
+				->successfulLogin([["selector" => "email", "value" => $this->user->email],["selector" => "password", "value" => "123456"]], true);
+		});
     }
-    public function testSuccessfullRegisterAndLogin()
-    {
-        $faker = Factory::create();
-        $email = $faker->email;
-        $firstName = $faker->firstName();
-        $lastName = $faker->lastName;
-        $password = 123456;
-        $this->browse(function (Browser $browser) use($email, $password, $firstName, $lastName) {
-            $browser->visit('/register')
-                    ->typeSlowly("firstName", $firstName, 10)
-                    ->typeSlowly("lastName", $lastName, 10)
-                    ->typeSlowly("email", $email, 10)
-                    ->typeSlowly("password", $password, 10)
-                    ->typeSlowly("passwordConfirmation", $password, 50)
-                    ->click('@register-button')
-                    ->pause(1500)
-                    // ->assertSee('Usuario creado con exito. Por favor espera mientras te redirigimos.')
-                    // ->pause(21234567)
-                    ->waitForLocation('/login')
-                    ->assertSee('Texsun')
-                    ->typeSlowly("email", $email, 10)
-                    ->typeSlowly("password", $password, 10)
-                    ->click('@login-button')
-                    ->pause(3000)
-                    ->assertPathIs('/home');
-        });
-    }
+    
+    /** @test */
+    public function incorrectlogin() {
+		$this->browse(function (Browser $browser) {
+            $browser->visit(new Login)
+				->unsuccessfullLogin();
+		});
+	}
 
 }
