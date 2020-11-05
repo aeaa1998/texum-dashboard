@@ -39,18 +39,17 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        
         $userCredentials = $request->only('email', 'password');
-
+        $user = User::where('email', $request->email)->first();
+        $userVerification = $user->verified_at;
+        if($userVerification == null) {
+            return response()->json(["Not Verified"], 411);
+        }
         if (Auth::attempt($userCredentials)) {
-            $user = User::where('email', $request->email)->first();
-            // CORREGIR
-            $userVerification = $user->verified_at;
-            if($userVerification == null) {
-                return response()->json(["Not Verified"], 411);
-            } else {
-                $request->session()->put('user_id', $user->id);
-                return response()->json(["Authenticated"], 200);
-            }
+            $request->session()->put('user_id', $user->id);
+            return response()->json(["Authenticated"], 200);
+
         } else {
             return response()->json(["Invalid Credentials"], 411);
         }
@@ -59,6 +58,6 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->session()->flush();
-        return view('auth.login');
+        return redirect('/login');
     }
 }

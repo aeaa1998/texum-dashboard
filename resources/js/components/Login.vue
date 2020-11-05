@@ -1,15 +1,21 @@
 <template>
   <div class="vh-100 tikal-wallpaper">
     <v-alert
+      id="invalid-alert"
       class="w-50 position-relative s-alert"
       :type="alertDetails.type"
       transition="scale-transition"
       :value="alertDetails.show"
-    >{{alertDetails.message}}</v-alert>
+      >{{ alertDetails.message }}</v-alert
+    >
     <v-container>
       <v-row align="center" justify="center">
         <v-col cols="2">
-          <img class="w-100 text-white" src="images/texum-logo.svg" alt="Kiwi standing on oval" />
+          <img
+            class="w-100 text-white"
+            src="images/texum-logo.svg"
+            alt="Kiwi standing on oval"
+          />
         </v-col>
         <v-col cols="12">
           <h1 class="text-center text-white">Texsun S.A.</h1>
@@ -38,8 +44,17 @@
             ></v-text-field>
           </v-card-text>
           <v-card-actions>
-            <v-btn dusk="login-button" :disabled="!validLoginform" text color="accent-4" @click="login">Ingresar</v-btn>
-            <v-btn text color="accent-4" href="/register">Registrarse</v-btn>
+            <v-btn
+              dusk="login"
+              :disabled="!validLoginform"
+              text
+              color="accent-4"
+              @click="login"
+              >Ingresar</v-btn
+            >
+            <v-btn dusk="register" text color="accent-4" href="/register"
+              >Registrarse</v-btn
+            >
           </v-card-actions>
         </v-form>
       </v-card>
@@ -54,19 +69,19 @@ export default {
       alertDetails: {
         show: false,
         message: "",
-        type: "success"
-      }, 
+        type: "success",
+      },
       email: "",
       password: "",
       validLoginform: true,
       rules: {
-        required: value => !!value || "Requerido.",
-        counter: value => value.length >= 6 || "Minimo 6 caracteres",
-        email: value => {
+        required: (value) => !!value || "Requerido.",
+        counter: (value) => value.length >= 6 || "Minimo 6 caracteres",
+        email: (value) => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
           return pattern.test(value) || "Invalid e-mail.";
-        }
-      }
+        },
+      },
     };
   },
   methods: {
@@ -74,9 +89,9 @@ export default {
       axios
         .post("/login", {
           email: this.email,
-          password: this.password
+          password: this.password,
         })
-        .then(response => {
+        .then((response) => {
           this.alertDetails.show = true;
           this.alertDetails.type = "success";
           this.alertDetails.message =
@@ -88,7 +103,7 @@ export default {
             window.location.replace("/home");
           }, 1000);
         })
-        .catch(error => {
+        .catch((error) => {
           this.alertDetails.show = true;
           this.alertDetails.type = "error";
           this.alertDetails.message = "Credenciales inválidas";
@@ -96,7 +111,7 @@ export default {
             this.alertDetails.show = false;
           }, 3000);
         });
-    }
-  }
+    },
+  },
 };
 </script>
