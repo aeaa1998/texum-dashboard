@@ -14,7 +14,7 @@ class LotsController extends Controller
         $lots = $lots->map(function($lot){
             $createdAt = $lot->created_at;
             unset($lot->created_at);
-            $lot->create_date = $createdAt->format('Y-m-d h:m:s a');
+            $lot->create_date = $createdAt->format('Y-m-d h:i:s a');
             return $lot;
         });
         return view('dashboard.lots')->with(['lots' => $lots]);

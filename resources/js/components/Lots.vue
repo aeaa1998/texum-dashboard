@@ -15,6 +15,9 @@
           ></v-text-field>
         </v-card-title>
         <v-data-table :headers="headers" :items="lots" :search="search">
+          <template v-slot:item.is_delivered="{ item }">
+            {{ item.is_delivered == 1 ? "Si" : "No" }}
+          </template>
           <!-- hide-default-footer agregar con el pagination -->
         </v-data-table>
       </v-card>
