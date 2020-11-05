@@ -10,8 +10,6 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-
-
     public function index()
     {
         $user = User::with('worker')->find(Auth::user()->id);

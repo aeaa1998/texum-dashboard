@@ -10,10 +10,13 @@ Route::post('/register', 'AuthController@register');
 Route::group(['middleware' => 'auth:api'], function () {
     Route::group(['namespace' => 'API'], function () {
         Route::get('/user', 'UserController@index');
+        Route::get('/clients', 'ClientsController@index');
+        Route::get('/client/{id}/lots', 'ClientsController@lots');
+        Route::post('packages', 'PackagesController@store');
     });
     Route::get('logout', 'OAuthController@logout');
     Route::post('/clients', 'ClientController@create');
-    Route::get('/clients', 'ClientController@index');
+    // Route::get('/clients', 'ClientController@index');
     Route::get('/clients/{id}', 'ClientController@show');
     Route::put('/client/{id}', 'ClientController@update');
     Route::delete('/client/{id}', 'ClientController@delete');
