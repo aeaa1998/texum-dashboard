@@ -27,10 +27,11 @@ class ProfileController extends Controller
     // Actualizar un perfil
     public function updateCredentials(Request $request)
     {
-        $user = User::find(Auth::user()->id);
+        $id =Auth::user()->id;
+        $user = User::find($id);
         $user->email = $request->email;
         $user->save();
-        $worker = Worker::where('user_id',63)->first();
+        $worker = Worker::where('user_id',$id)->first();
         $worker->first_name = $request->first_name;
         $worker->last_name = $request->last_name;
         $worker->save();

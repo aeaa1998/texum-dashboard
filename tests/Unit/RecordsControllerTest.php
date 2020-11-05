@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 use LockerSeeder;
 
-class RequestControllerTest extends TestCase
+class RecordsControllerTest extends TestCase
 {
     use RefreshDatabase;
     /**
@@ -47,60 +47,36 @@ class RequestControllerTest extends TestCase
         
     }
 
-    public function testGetRequestController()
+    public function testGetRecordsController()
     {  
         $response = $this->actingAs($this->user)
-                        ->get('/requests/general');
+                        ->get('/records/general');
         $response->assertStatus(200);
     }
 
-    public function testGetRequestControllerWithStress()
+    public function testGetRecordsControllerWithStress()
+    {  
+        factory(Package::class, 1000)->create();
+        $starttime = microtime(true);
+        $response = $this->actingAs($this->user)
+                        ->get('/records/general');
+        $response->assertStatus(200);
+        $endtime = microtime(true);
+        $timediff = $endtime - $starttime;
+        $this->assertTrue($timediff <= 4);
+    }
+
+    public function testGetRecordsControllerWithStressAndParams()
     {  
         
         factory(Package::class, 1000)->create();
         $starttime = microtime(true);
         $response = $this->actingAs($this->user)
-                        ->get('/requests/general');
+                        ->get('/records/general?query=here&lot_id=1');
         $response->assertStatus(200);
         $endtime = microtime(true);
         $timediff = $endtime - $starttime;
-        $this->assertTrue($timediff <= 5);
+        $this->assertTrue($timediff <= 4);
     }
 
-    public function testGetRequestControllerWithStressAndParams()
-    {  
-        
-        factory(Package::class, 1000)->create();
-        $starttime = microtime(true);
-        $response = $this->actingAs($this->user)
-                        ->get('/requests/general?query=here&lot_id=1');
-        $response->assertStatus(200);
-        $endtime = microtime(true);
-        $timediff = $endtime - $starttime;
-        $this->assertTrue($timediff <= 5);
-    }
-
-    public function testPostRequest()
-    {  
-        $package = Package::with('lastRecord.newLocker')->first();
-        
-        $oldLocker = $package->lastRecord->newLocker;
-        $locker  = Locker::where('id', '!=', $oldLocker->id)->first();
-        ;
-        $response = $this
-        ->actingAs($this->user)
-        ->postJson('/requests', 
-        [
-            'package_id'   => $package->id,
-            'old_locker_row'  => $oldLocker->row,
-            'old_locker_column'  => $oldLocker->column,
-            'old_locker_letter'  => $oldLocker->letter,
-            'new_locker_row'  => $locker->row,
-            'new_locker_column'  => $locker->column,
-            'new_locker_letter'  => $locker->letter,
-        ]);
-        // dd($response);
-        $response
-            ->assertStatus(201);
-    }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Client;
 use App\Models\Locker;
 use App\Models\Lot;
@@ -14,13 +15,14 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Worker;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 use LockerSeeder;
 
-class RequestControllerTest extends TestCase
+class ProfileControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
     /**
      * A basic unit test example.
      *
@@ -47,60 +49,40 @@ class RequestControllerTest extends TestCase
         
     }
 
-    public function testGetRequestController()
+    public function testById()
     {  
+        $user = User::with('worker')->find($this->user->id);
         $response = $this->actingAs($this->user)
-                        ->get('/requests/general');
+                        ->get("/profile/{$this->user->id}");
+                        
         $response->assertStatus(200);
     }
 
-    public function testGetRequestControllerWithStress()
+    public function testUpdate()
     {  
-        
-        factory(Package::class, 1000)->create();
-        $starttime = microtime(true);
+        $user = User::with('worker')->find($this->user->id);
         $response = $this->actingAs($this->user)
-                        ->get('/requests/general');
+                        ->putJson("/profiles", [
+                            'email' => $this->faker->unique()->email,
+                            'first_name' => $this->faker->firstName,
+                            'last_name' => $this->faker->lastName,
+                        ]);
+                        
         $response->assertStatus(200);
-        $endtime = microtime(true);
-        $timediff = $endtime - $starttime;
-        $this->assertTrue($timediff <= 5);
     }
 
-    public function testGetRequestControllerWithStressAndParams()
+    public function testPassword()
     {  
-        
-        factory(Package::class, 1000)->create();
-        $starttime = microtime(true);
+        $user = User::with('worker')->find($this->user->id);
         $response = $this->actingAs($this->user)
-                        ->get('/requests/general?query=here&lot_id=1');
+                        ->putJson("/profile/password", [
+                            'password' => "secret124",
+                        ]);
+                        
         $response->assertStatus(200);
-        $endtime = microtime(true);
-        $timediff = $endtime - $starttime;
-        $this->assertTrue($timediff <= 5);
+        $user = User::with('worker')->find($this->user->id);
+        $boold = Auth::attempt(['email' => $user->email, 'password' => 'secret124']);
+        $this->assertTrue($boold);
     }
 
-    public function testPostRequest()
-    {  
-        $package = Package::with('lastRecord.newLocker')->first();
-        
-        $oldLocker = $package->lastRecord->newLocker;
-        $locker  = Locker::where('id', '!=', $oldLocker->id)->first();
-        ;
-        $response = $this
-        ->actingAs($this->user)
-        ->postJson('/requests', 
-        [
-            'package_id'   => $package->id,
-            'old_locker_row'  => $oldLocker->row,
-            'old_locker_column'  => $oldLocker->column,
-            'old_locker_letter'  => $oldLocker->letter,
-            'new_locker_row'  => $locker->row,
-            'new_locker_column'  => $locker->column,
-            'new_locker_letter'  => $locker->letter,
-        ]);
-        // dd($response);
-        $response
-            ->assertStatus(201);
-    }
 }

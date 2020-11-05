@@ -25,18 +25,16 @@ class AuthController extends Controller
         $user           = new User();
         $user->email    = $request->email;
         $user->password = Hash::make($request->password);
+        $user->role_id = 1;
         $user->save();
         $worker             = new Worker();
         $worker->first_name = $request->first_name;
         $worker->last_name  = $request->last_name;
         $worker->user_id    = $user->id;
         $worker->save();
-        $userRole = new UserRole();
-        $userRole->user_id = $user->id;
-        $userRole->role_id = 1;
-        $userRole->save();
+
         // Mail::to($request->email)->queue(new WelcomeEmail($msg));
-        return response()->json(["message", "successfully created"]);
+        return response()->json(["message" => "successfully created"]);
     }
 
     public function login(Request $request)

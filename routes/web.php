@@ -37,12 +37,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/records/general', 'Records\Controller@index');
     Route::get('/profile', 'ProfileController@index')->name('profile');
-    Route::post('/profile', 'ProfileController@index')->name('profile');
+    Route::get('/profile/{id}', 'ProfileController@show');
     Route::put('/profiles','ProfileController@updateCredentials');
     Route::put('/profile/password','ProfileController@updatePassword');
 
     Route::get('/workers', 'WorkerController@index');
-    Route::get('/workers/{user_id}/profile', 'WorkerController@show')->name('user');
+    Route::get('/workers/{user_id}/profile', 'WorkerController@show');
     Route::post('/workers/{user_id}/accept', 'WorkerController@processWorker');
 
     Route::get('/roles', 'UserRoleController@index')->name('roles');
