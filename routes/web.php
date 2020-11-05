@@ -48,5 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/roles', 'UserRoleController@index')->name('roles');
     //Route::put('/roles/{userId}',"UserRoleController@update");
 
+    Route::get('/clients','ClientController@index')->name('clients');
+    Route::put('/client/{id}', 'ClientController@update');
+    Route::get('/lots', 'LotsController@index')->name('lots');
     Route::get('logout', 'AuthController@logout');
 });

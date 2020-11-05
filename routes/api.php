@@ -7,6 +7,7 @@ Route::post('oauth/login', 'Auth\OAuthController@login');
 Route::post('/login', 'AuthController@login');
 Route::post('/register', 'AuthController@register');
 // });
+
 Route::group(['middleware' => 'auth:api'], function () {
     Route::group(['namespace' => 'API'], function () {
         Route::get('/user', 'UserController@index');
@@ -15,6 +16,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('packages', 'PackagesController@store');
     });
     Route::get('logout', 'OAuthController@logout');
+
     Route::post('/clients', 'ClientController@create');
     // Route::get('/clients', 'ClientController@index');
     Route::get('/clients/{id}', 'ClientController@show');

@@ -85,12 +85,22 @@ export default {
       {
         icon: "mdi-account-group",
         title: "Tabla trabajadores",
-        href: "/workers-table"
+        href: "/workers"
       },
       {
         icon: "mdi-account-cog",
         title: "Roles Trabajadores",
         href: "/roles"
+      },
+      {
+        icon: "mdi-account-tie",
+        title: "Clientes",
+        href: "/clients"
+      },
+      {
+        icon: "mdi-archive",
+        title: "Cortes",
+        href: "/lots"
       }
     ],
     accountItems: [

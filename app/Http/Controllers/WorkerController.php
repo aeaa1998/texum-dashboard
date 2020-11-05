@@ -88,9 +88,9 @@ class WorkerController extends Controller
       $user->save();
       return response()->json(['message' => 'Se verifico el usuario de manera correcta']);
     } else {
-      Worker::where('user_id', $userId)->delete();
-      Record::where('user_id', $userId)->delete();
       UserRole::where('user_id', $userId)->delete();
+      Record::where('user_id', $userId)->delete();
+      Worker::where('user_id', $userId)->delete();
       $user->delete();
       return response()->json(['message' => 'Se rechazo el usuario de manera correcta']);
     }

@@ -37,9 +37,9 @@
                           clearable
                           v-model="lotId"
                           :items="lots"
-                          :item-text="(item) => (`Lote: ${item.client.name} - ${item.number}`)"
+                          :item-text="(item) => (`Corte: ${item.client.name} - ${item.number}`)"
                           :item-value="(item) => (item.id)"
-                          label="Lote: Cliente - Número"
+                          label="Corte: Cliente - Número"
                         ></v-select>
                       </v-col>
                     </v-row>
@@ -151,7 +151,7 @@
                         </v-col>
                         <v-col cols="12" md="4">
                           <div>
-                            <h4 style="display: inline;">Número de lote</h4>
+                            <h4 style="display: inline;">Número de Corte</h4>
                             <v-chip
                               class="ml-4"
                               small
@@ -219,7 +219,7 @@
                           </v-col>
                           <v-col cols="12" md="6">
                             <div>
-                              <h4 style="display: inline;">Número de lote</h4>
+                              <h4 style="display: inline;">Número de Corte</h4>
                               <v-chip
                                 class="ml-4"
                                 small
@@ -287,7 +287,7 @@ export default {
     headers: [
       { align: "center", text: "Código de barras", value: "bar_code" },
       { align: "center", text: "Cliente", value: "client.name" },
-      { align: "center", text: "Número de lote", value: "lot.number" },
+      { align: "center", text: "Número de Corte", value: "lot.number" },
       { align: "center", text: "Status", value: "status.name" },
       {
         align: "center",

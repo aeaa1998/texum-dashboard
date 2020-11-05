@@ -12,7 +12,8 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::all();
-        return response()->json($clients);
+        //return response()->json($clients);
+        return view('dashboard.clients')->with(['clients' => $clients]);
     }
     // Obtener cliente por id
     public function show($id)
