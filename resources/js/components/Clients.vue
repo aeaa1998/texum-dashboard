@@ -23,6 +23,9 @@
                   single-line
                   hide-details
                 ></v-text-field>
+                <v-btn @click="createModalOpen = true" large icon color="black" dark class="ml-3">
+                  <v-icon>mdi-plus</v-icon>
+                </v-btn>
               </v-card-title>
               <v-data-table :headers="headers" :items="clients" :search="search">
                 <template v-slot:item.created_at="{ item }">
@@ -100,6 +103,12 @@
         </div>
       </v-window-item>
     </v-window>
+    <!-- <NewClientModal
+      v-model="createModalOpen"
+      width="80%"
+      max-width="850"
+      :payload="{clients}"
+    /> -->
   </v-container>
 </template>
 
@@ -149,6 +158,7 @@ export default {
     pagination: {},
     selected: null,
     editSelect: null,
+    createModalOpen: false,
   }),
   beforeMount() {
     this.clientes = this.clients.data
