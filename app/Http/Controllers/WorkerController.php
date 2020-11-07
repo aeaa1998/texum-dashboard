@@ -98,7 +98,7 @@ class WorkerController extends Controller
 
   public function delete($userId) {
     $user = User::find($userId);
-    UserRole::where('user_id',$userId)->delete();
+    //UserRole::where('user_id',$userId)->delete();
     Record::where('user_id', $userId)->delete();
     Worker::where('user_id', $userId)->delete();
     $user->delete();

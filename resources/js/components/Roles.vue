@@ -26,15 +26,7 @@
               </v-card-title>
               <v-data-table :headers="headers" :items="roles" :search="search">
                 <template v-slot:item.role_id="{ item }">
-                  <span v-if="item.userrole.role_id == 2">
-                    <h7> Administrador </h7>
-                  </span>
-                  <span v-if="item.userrole.role_id == 3">
-                    <h7> Jefe </h7>
-                  </span>
-                  <span v-else>
-                    <h7> Trabajador </h7>
-                  </span>
+                  {{roleIdentifier(item.role_id)}}
                 </template>
                 <template v-slot:item.created_at="{ item }">
                   {{moment(item.created_at).locale('es').format('ll')}}
@@ -184,7 +176,12 @@ export default {
           this.snackbar.color = "error";
           this.snackbar.show = true;
         });
-    }
+    },
+    roleIdentifier(rol) {
+      if(rol == 1) return `Trabajador`;
+      if(rol == 2) return `Administrador`;
+      if(rol == 3) return `Jefe`;
+    },
   },
   watch: {
     searchModel: {
