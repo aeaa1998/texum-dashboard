@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use Illuminate\Database\Eloquent\FactoryBuilder;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Support\Facades\Schema;
+
 use Illuminate\Http\Request;
 use Tests\TestCase;
 
