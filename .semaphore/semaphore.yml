@@ -1,0 +1,25 @@
+version: v1.0
+name: First pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Lint
+    task:
+      prologue:
+        commands:
+          - checkout
+      jobs:
+        - name: Run Unit Tests
+          commands:
+            - vendor/bin/phpunit
+  - name: Unit tests
+    task:
+      prologue:
+        commands:
+          - checkout
+      jobs:
+        - name: Unit tests
+          commands:
+            - vendor/bin/phpunit

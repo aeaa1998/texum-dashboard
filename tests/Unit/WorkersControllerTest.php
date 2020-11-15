@@ -6,11 +6,15 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use Illuminate\Database\Eloquent\FactoryBuilder;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Http\Request;
 use Tests\TestCase;
+
 use Illuminate\Support\Facades\Schema;
 use App\Models\Worker;
 use Carbon\Carbon;
+
 
 class RequestWorkersControllerTest extends TestCase
 {
@@ -20,6 +24,7 @@ class RequestWorkersControllerTest extends TestCase
      *
      * @return void
      */
+
     private $user= null;
 
     public function setUp() : void
@@ -32,6 +37,7 @@ class RequestWorkersControllerTest extends TestCase
         Schema::enableForeignKeyConstraints();
 
     }
+
 
     public function testGetWorkersController()
     {

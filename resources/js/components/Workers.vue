@@ -157,6 +157,9 @@
                     <v-btn icon @click="navigateToDetail(item)">
                       <v-icon>mdi-eye</v-icon>
                     </v-btn>
+                    <v-btn icon @click="eliminateWorker(item)">
+                      <v-icon>mdi-close</v-icon>
+                    </v-btn>
                   </span>
                 </template>
               </v-data-table>
@@ -366,6 +369,23 @@ export default {
       this.currentWindow += 1;
       this.currentTab = 0;
     },
+    eliminateWorker(selected) {
+      this.selected = selected;
+      console.log(this.selected.id);
+      axios
+        .delete(`/workers/${this.selected.id}`)
+        .then((response) => {
+          //showAlert
+          this.snackbar.text = "Usuario eliminado con exito";
+          this.snackbar.color = "success";
+          this.snackbar.show = true;
+        })
+        .catch(() => {
+          this.snackbar.text = "No se pudo procesar la accion";
+          this.snackbar.color = "error";
+          this.snackbar.show = true;
+        });
+    },
   },
   watch: {
     searchModel: {
@@ -395,6 +415,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

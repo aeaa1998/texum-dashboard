@@ -27,7 +27,9 @@ class UserRoleController extends Controller
             $item->menu_open = false;
             return $item;
         });
+
         return view('dashboard.roles')->with(['roles' => $roles, 'menus' => $allMenus]);
+
     }
 
 
@@ -43,13 +45,9 @@ class UserRoleController extends Controller
      */
     public function update(Request $request, $userId)
     {
-        $user = User::with('roles')->where('id', $userId)->first();
-
-        $user->roles()->detach();
-        collect($request->roles)->map(function ($roleId) use ($user) {
-            $user->roles()->attach($roleId);
-        });
-        $user->refresh();
+        $user = User::where('id', $userId)->first();
+        $user->role_id = $request->role;
+        $user->save();
         return response()->json($user);
     }
 

@@ -23,6 +23,7 @@
                   single-line
                   hide-details
                 ></v-text-field>
+
                 <v-btn
                   @click="createModalOpen = true"
                   large
@@ -114,10 +115,11 @@
         </div>
       </v-window-item>
     </v-window>
+
     <NewClientModal
       v-model="createModalOpen"
       width="80%"
-      max-width="850"
+      max-width="450"
       :onSuccess="onSuccess"
     />
   </v-container>
@@ -174,6 +176,7 @@ export default {
     pagination: {},
     selected: null,
     editSelect: null,
+    createModalOpen: false,
   }),
   beforeMount() {
     this.clients = this.payload;

@@ -45,17 +45,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/workers', 'WorkerController@index');
     Route::get('/workers/{user_id}/profile', 'WorkerController@show');
     Route::post('/workers/{user_id}/accept', 'WorkerController@processWorker');
+    Route::delete('/workers/{id}','WorkerController@delete');
 
     Route::get('/roles', 'UserRoleController@index')->name('roles');
+
     Route::post('/roles', 'UserRoleController@store');
     Route::put('/role/{id}', 'UserRoleController@updatePermissions');
     Route::delete('/role/{id}', 'UserRoleController@delete');
     Route::put('/role/{role_id}/menu/{menu_id}', 'UserRoleController@updatePermission');
     //Route::put('/roles/{userId}',"UserRoleController@update");
 
+
     Route::get('/clients','ClientController@index')->name('clients');
     Route::post('/clients','ClientController@create');
     Route::put('/client/{id}', 'ClientController@update');
+    Route::post('/client','ClientController@create');
+
     Route::get('/lots', 'LotsController@index')->name('lots');
     Route::get('logout', 'AuthController@logout');
 });
