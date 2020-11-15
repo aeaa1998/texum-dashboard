@@ -32,10 +32,10 @@ export default {
     headers: [
       { align: "center", text: "id", value: "id" },
       { align: "center", text: "Numero", value: "number" },
-      { align: "center", text: "Cliente", value: "client_id" },
+      { align: "center", text: "Cliente", value: "client.name" },
       { align: "center", text: "Entregado", value: "is_delivered" },
       { align: "center", text: "Creado", value: "create_date" },
-      { align: "center", text: "Acciones" },
+      // { align: "center", text: "Acciones" },
     ],
     lotes: [],
     search: "",

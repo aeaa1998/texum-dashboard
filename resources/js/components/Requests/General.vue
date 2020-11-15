@@ -6,14 +6,17 @@
       multi-line
       v-model="snackbar.show"
       :timeout="4000"
-    >{{ snackbar.text }}</v-snackbar>
+      >{{ snackbar.text }}</v-snackbar
+    >
 
     <v-row justify="center">
       <v-col sm="12" md="3">
         <!-- This is the search component -->
         <v-expansion-panels multiple class="mb-1">
           <v-expansion-panel>
-            <v-expansion-panel-header>Filtrar por fechas</v-expansion-panel-header>
+            <v-expansion-panel-header
+              >Filtrar por fechas</v-expansion-panel-header
+            >
             <v-expansion-panel-content>
               <v-row no-gutters>
                 <v-col cols="12">
@@ -28,6 +31,8 @@
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
+                        readonly
+                        clearable
                         v-model="computedDateFrom"
                         label="Fecha de inicio"
                         v-bind="attrs"
@@ -38,12 +43,14 @@
                       v-model="dateFrom"
                       no-title
                       @input="menuFrom = false"
-                      :allowed-dates="val  => {
-                            if(dateTo){
-                                return moment(val) <  moment(dateTo)
-                            }
-                            return true
-                            }"
+                      :allowed-dates="
+                        (val) => {
+                          if (dateTo) {
+                            return moment(val) < moment(dateTo);
+                          }
+                          return true;
+                        }
+                      "
                     />
                   </v-menu>
                 </v-col>
@@ -59,6 +66,8 @@
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
+                        readonly
+                        clearable
                         v-model="computedDateTo"
                         label="Fecha de final"
                         v-bind="attrs"
@@ -69,12 +78,14 @@
                       v-model="dateTo"
                       no-title
                       @input="menuTo = false"
-                      :allowed-dates="val  => {
-                            if(dateFrom){
-                                return moment(val) >  moment(dateFrom)
-                            }
-                            return true
-                            }"
+                      :allowed-dates="
+                        (val) => {
+                          if (dateFrom) {
+                            return moment(val) > moment(dateFrom);
+                          }
+                          return true;
+                        }
+                      "
                     ></v-date-picker>
                   </v-menu>
                 </v-col>
@@ -82,21 +93,28 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
           <v-expansion-panel>
-            <v-expansion-panel-header>Filtros de busqueda generales</v-expansion-panel-header>
+            <v-expansion-panel-header
+              >Filtros de busqueda generales</v-expansion-panel-header
+            >
             <v-expansion-panel-content>
               <v-form v-model="isValidForm">
                 <h6>Datos del paquete</h6>
                 <v-row no-gutters>
                   <v-col cols="12">
-                    <v-text-field v-model="barCode" label="Codigo de barras"></v-text-field>
+                    <v-text-field
+                      v-model="barCode"
+                      label="Codigo de barras"
+                    ></v-text-field>
                   </v-col>
                   <v-col cols="12">
                     <v-select
                       clearable
                       v-model="lotId"
                       :items="lots"
-                      :item-text="(item) => (`Lote: ${item.client.name} - ${item.number}`)"
-                      :item-value="(item) => (item.id)"
+                      :item-text="
+                        (item) => `Lote: ${item.client.name} - ${item.number}`
+                      "
+                      :item-value="(item) => item.id"
                       label="Lote: Cliente - Número"
                     ></v-select>
                   </v-col>
@@ -105,24 +123,46 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
           <v-expansion-panel>
-            <v-expansion-panel-header>Ubicación del paquete</v-expansion-panel-header>
+            <v-expansion-panel-header
+              >Ubicación del paquete</v-expansion-panel-header
+            >
             <v-expansion-panel-content>
               <h6>Ubicación actual del paquete</h6>
               <v-row>
                 <v-col cols="12" md="6">
-                  <v-select clearable v-model="oldLetter" :items="letters" label="Letra del rack"></v-select>
+                  <v-select
+                    clearable
+                    v-model="oldLetter"
+                    :items="letters"
+                    label="Letra del rack"
+                  ></v-select>
                 </v-col>
                 <v-col cols="12" md="6">
-                  <v-select clearable v-model="oldRow" :items="rows" label="Fila del rack">
+                  <v-select
+                    clearable
+                    v-model="oldRow"
+                    :items="rows"
+                    label="Fila del rack"
+                  >
                     <template v-slot:no-data>
-                      <div class="pa-2">No hay filas con la letra del rack seleccionado</div>
+                      <div class="pa-2">
+                        No hay filas con la letra del rack seleccionado
+                      </div>
                     </template>
                   </v-select>
                 </v-col>
                 <v-col cols="12" md="6">
-                  <v-select clearable v-model="oldColumn" :items="columns" label="Columna del rack">
+                  <v-select
+                    clearable
+                    v-model="oldColumn"
+                    :items="columns"
+                    label="Columna del rack"
+                  >
                     <template v-slot:no-data>
-                      <div class="pa-2">No hay columnas con la letra y fila del rack seleccionado</div>
+                      <div class="pa-2">
+                        No hay columnas con la letra y fila del rack
+                        seleccionado
+                      </div>
                     </template>
                   </v-select>
                 </v-col>
@@ -130,19 +170,39 @@
               <h6>Ubicación a cambiar del paquete</h6>
               <v-row>
                 <v-col cols="12" md="6">
-                  <v-select clearable v-model="newLetter" :items="letters" label="Letra del rack"></v-select>
+                  <v-select
+                    clearable
+                    v-model="newLetter"
+                    :items="letters"
+                    label="Letra del rack"
+                  ></v-select>
                 </v-col>
                 <v-col cols="12" md="6">
-                  <v-select clearable v-model="newRow" :items="rows" label="Fila del rack">
+                  <v-select
+                    clearable
+                    v-model="newRow"
+                    :items="rows"
+                    label="Fila del rack"
+                  >
                     <template v-slot:no-data>
-                      <div class="pa-2">No hay filas con la letra del rack seleccionado</div>
+                      <div class="pa-2">
+                        No hay filas con la letra del rack seleccionado
+                      </div>
                     </template>
                   </v-select>
                 </v-col>
                 <v-col cols="12" md="6">
-                  <v-select clearable v-model="newColumn" :items="columns" label="Columna del rack">
+                  <v-select
+                    clearable
+                    v-model="newColumn"
+                    :items="columns"
+                    label="Columna del rack"
+                  >
                     <template v-slot:no-data>
-                      <div class="pa-2">No hay columnas con la letra y fila del rack seleccionado</div>
+                      <div class="pa-2">
+                        No hay columnas con la letra y fila del rack
+                        seleccionado
+                      </div>
                     </template>
                   </v-select>
                 </v-col>
@@ -156,11 +216,23 @@
           <v-card-title>
             Solicitudes de paquetes
             <v-spacer></v-spacer>
-            <v-text-field v-model="generalFilter" label="Buscar" single-line hide-details></v-text-field>
+            <v-text-field
+              v-model="generalFilter"
+              label="Buscar"
+              single-line
+              hide-details
+            ></v-text-field>
             <v-btn icon>
               <v-icon>mdi-magnify</v-icon>
             </v-btn>
-            <v-btn @click="createModalOpen = true" large icon color="black" dark class="ml-3">
+            <v-btn
+              @click="createModalOpen = true"
+              large
+              icon
+              color="black"
+              dark
+              class="ml-3"
+            >
               <v-icon>mdi-plus</v-icon>
             </v-btn>
           </v-card-title>
@@ -169,7 +241,9 @@
               <v-chip
                 @click="statusIdFiler = 2"
                 class="mr-2"
-                :color="statusIdFiler == 2 ? `orange lighten-1` : `orange lighten-4`"
+                :color="
+                  statusIdFiler == 2 ? `orange lighten-1` : `orange lighten-4`
+                "
               >
                 <v-icon left>mdi-alarm</v-icon>Pendientes
               </v-chip>
@@ -182,7 +256,9 @@
               </v-chip>
               <v-chip
                 @click="statusIdFiler = 1"
-                :color="statusIdFiler == 1 ? `green darken-3` : `green lighten-5`"
+                :color="
+                  statusIdFiler == 1 ? `green darken-3` : `green lighten-5`
+                "
               >
                 <v-icon left>mdi-check</v-icon>Aceptados
               </v-chip>
@@ -205,12 +281,12 @@
               </span>
               <span v-else>Sin acciones</span>
             </template>
-            <template
-              v-slot:item.oldLocker="{ item }"
-            >{{`${item.old_locker.letter} - ${item.old_locker.row} - ${item.old_locker.column}`}}</template>
-            <template
-              v-slot:item.newLocker="{ item }"
-            >{{`${item.new_locker.letter} - ${item.new_locker.row} - ${item.new_locker.column}`}}</template>
+            <template v-slot:item.oldLocker="{ item }">{{
+              `${item.old_locker.letter} - ${item.old_locker.row} - ${item.old_locker.column}`
+            }}</template>
+            <template v-slot:item.newLocker="{ item }">{{
+              `${item.new_locker.letter} - ${item.new_locker.row} - ${item.new_locker.column}`
+            }}</template>
           </v-data-table>
           <div>
             <v-pagination
@@ -224,7 +300,10 @@
         </v-card>
       </v-col>
     </v-row>
-    <NewRequestModal v-model="createModalOpen" :payload="{rows, letters,columns, onSuccess}" />
+    <NewRequestModal
+      v-model="createModalOpen"
+      :payload="{ rows, letters, columns, onSuccess }"
+    />
   </v-container>
 </template>
 <script>
@@ -433,11 +512,21 @@ export default {
     },
   },
   computed: {
-    computedDateFrom() {
-      return this.formatDate(this.dateFrom);
+    computedDateFrom: {
+      get() {
+        return this.formatDate(this.dateFrom);
+      },
+      set(value) {
+        this.dateFrom = value;
+      },
     },
-    computedDateTo() {
-      return this.formatDate(this.dateTo);
+    computedDateTo: {
+      get() {
+        return this.formatDate(this.dateTo);
+      },
+      set(value) {
+        this.dateTo = value;
+      },
     },
   },
 };

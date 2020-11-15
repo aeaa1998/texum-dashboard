@@ -6,7 +6,8 @@
       multi-line
       v-model="snackbar.show"
       :timeout="4000"
-    >{{ snackbar.text }}</v-snackbar>
+      >{{ snackbar.text }}</v-snackbar
+    >
     <v-window v-model="currentWindow">
       <v-window-item :value="1">
         <v-row justify="center">
@@ -14,7 +15,9 @@
             <!-- This is the search component -->
             <v-expansion-panels multiple class="mb-1">
               <v-expansion-panel>
-                <v-expansion-panel-header>Filtrar por creación de usuario</v-expansion-panel-header>
+                <v-expansion-panel-header
+                  >Filtrar por creación de usuario</v-expansion-panel-header
+                >
                 <v-expansion-panel-content>
                   <v-row no-gutters>
                     <v-col cols="12">
@@ -36,15 +39,21 @@
                           ></v-text-field>
                         </template>
                         <v-date-picker
+                          readonly
+                          clearable
                           v-model="searchModel.createdFrom"
                           no-title
                           @input="menus.from = false"
-                          :allowed-dates="val  => {
-                                if(searchModel.createdTo){
-                                    return moment(val) <  moment(searchModel.createdTo)
-                                }
-                                return true
-                                }"
+                          :allowed-dates="
+                            (val) => {
+                              if (searchModel.createdTo) {
+                                return (
+                                  moment(val) < moment(searchModel.createdTo)
+                                );
+                              }
+                              return true;
+                            }
+                          "
                         />
                       </v-menu>
                     </v-col>
@@ -60,6 +69,8 @@
                       >
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
+                            readonly
+                            clearable
                             v-model="computedDateTo"
                             label="Fecha de final"
                             v-bind="attrs"
@@ -70,12 +81,16 @@
                           v-model="searchModel.createdTo"
                           no-title
                           @input="menus.to = false"
-                          :allowed-dates="val  => {
-                                if(searchModel.createdFrom){
-                                    return moment(val) >  moment(searchModel.createdFrom)
-                                }
-                                return true
-                                }"
+                          :allowed-dates="
+                            (val) => {
+                              if (searchModel.createdFrom) {
+                                return (
+                                  moment(val) > moment(searchModel.createdFrom)
+                                );
+                              }
+                              return true;
+                            }
+                          "
                         ></v-date-picker>
                       </v-menu>
                     </v-col>
@@ -83,15 +98,23 @@
                 </v-expansion-panel-content>
               </v-expansion-panel>
               <v-expansion-panel>
-                <v-expansion-panel-header>Filtros de busqueda generales</v-expansion-panel-header>
+                <v-expansion-panel-header
+                  >Filtros de busqueda generales</v-expansion-panel-header
+                >
                 <v-expansion-panel-content>
                   <h6>Datos del trabajador</h6>
                   <v-row no-gutters>
                     <v-col cols="12">
-                      <v-text-field v-model="searchModel.firstName" label="Nombre del trabajador"></v-text-field>
+                      <v-text-field
+                        v-model="searchModel.firstName"
+                        label="Nombre del trabajador"
+                      ></v-text-field>
                     </v-col>
                     <v-col cols="12">
-                      <v-text-field v-model="searchModel.lastName" label="Apellido del trabajador"></v-text-field>
+                      <v-text-field
+                        v-model="searchModel.lastName"
+                        label="Apellido del trabajador"
+                      ></v-text-field>
                     </v-col>
                   </v-row>
                 </v-expansion-panel-content>
@@ -113,12 +136,14 @@
                 ></v-text-field>
               </v-card-title>
               <v-data-table :headers="headers" :items="users" :search="search">
-                <template
-                  v-slot:item.created_at="{ item }"
-                >{{moment(item.created_at).locale('es').format('ll')}}</template>
-                <template
-                  v-slot:item.verified_at="{ item }"
-                >{{item.verified_at ? moment(item.verified_at).locale('es').format('ll') : 'Sin verificar'}}</template>
+                <template v-slot:item.created_at="{ item }">{{
+                  moment(item.created_at).locale("es").format("ll")
+                }}</template>
+                <template v-slot:item.verified_at="{ item }">{{
+                  item.verified_at
+                    ? moment(item.verified_at).locale("es").format("ll")
+                    : "Sin verificar"
+                }}</template>
                 <template v-slot:item.actions="{ item }">
                   <span v-if="!item.verified_at">
                     <v-btn icon @click="acceptWorker(item, true)">
@@ -164,29 +189,42 @@
                       <v-card-text>
                         <v-row>
                           <v-col cols="3" justify="center">
-                            <v-avatar
-                              color="#DBDBDB"
-                              size="100">
+                            <v-avatar color="#DBDBDB" size="100">
                               <v-icon size="50px">mdi-account</v-icon>
                             </v-avatar>
                           </v-col>
                           <v-col cols="12" md="4">
                             <h4>Nombre</h4>
-                            <v-text-field :value="selected.first_name" readonly autofocus></v-text-field>
+                            <v-text-field
+                              :value="selected.first_name"
+                              readonly
+                              autofocus
+                            ></v-text-field>
                           </v-col>
                           <v-col cols="12" md="4">
                             <h4>Apellido</h4>
-                            <v-text-field :value="selected.last_name" readonly autofocus></v-text-field>
+                            <v-text-field
+                              :value="selected.last_name"
+                              readonly
+                              autofocus
+                            ></v-text-field>
                           </v-col>
-                          <v-col md="3">
-                          </v-col>
+                          <v-col md="3"> </v-col>
                           <v-col cols="12" md="4">
                             <h4>Email</h4>
-                            <v-text-field :value="selected.email" readonly autofocus></v-text-field>
+                            <v-text-field
+                              :value="selected.email"
+                              readonly
+                              autofocus
+                            ></v-text-field>
                           </v-col>
                           <v-col cols="12" md="4">
                             <h4>Fecha Verificacion</h4>
-                            <v-text-field :value="selected.verified_at" readonly autofocus></v-text-field>
+                            <v-text-field
+                              :value="selected.verified_at"
+                              readonly
+                              autofocus
+                            ></v-text-field>
                           </v-col>
                         </v-row>
                       </v-card-text>
@@ -214,7 +252,7 @@ export default {
     alertDetails: {
       show: false,
       message: "",
-      type: "success"
+      type: "success",
     },
     snackbar: {
       show: false,
@@ -338,11 +376,21 @@ export default {
     },
   },
   computed: {
-    computedDateFrom() {
-      return this.formatDate(this.searchModel.createdFrom);
+    computedDateFrom: {
+      get() {
+        return this.formatDate(this.searchModel.createdFrom);
+      },
+      set(value) {
+        this.searchModel.createdFrom = value;
+      },
     },
-    computedDateTo() {
-      return this.formatDate(this.searchModel.createdTo);
+    computedDateTo: {
+      get() {
+        return this.formatDate(this.searchModel.createdTo);
+      },
+      set(value) {
+        this.searchModel.createdTo = value;
+      },
     },
   },
 };

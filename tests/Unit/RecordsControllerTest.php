@@ -31,7 +31,7 @@ class RecordsControllerTest extends TestCase
 
     public function setUp() : void
     {
-        parent::setUp();
+        parent::setup();
         Schema::disableForeignKeyConstraints();
         factory(Worker::class)->create();
         $this->user = User::first();

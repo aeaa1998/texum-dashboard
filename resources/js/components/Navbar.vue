@@ -8,10 +8,7 @@
       :collapse-on-scroll="collapseOnScroll"
       scroll-target="#target"
     >
-      <v-app-bar-nav-icon
-        v-if="group !== 0"
-        @click="drawer = true"
-      ></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Texsun S.A. Dashboard</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -95,8 +92,13 @@ export default {
         href: "/records/general",
       },
       {
+        icon: "mdi-file-multiple",
+        title: "Solicitudes",
+        href: "/requests/general",
+      },
+      {
         icon: "mdi-account-group",
-        title: "Tabla trabajadores",
+        title: "Trabajadores",
         href: "/workers",
       },
       {
@@ -122,9 +124,19 @@ export default {
     ],
   }),
   beforeMount() {
-    this.group = window.location.pathname !== "/home" ? 1 : 0;
+    this.resolveCurrentGroup();
+    // this.group = window.location.pathname !== "/home" ? 1 : 0;
     // console.log(window.location.pathname);
     // this.group = 0;
+  },
+  methods: {
+    resolveCurrentGroup() {
+      this.drawerItems.forEach((item, index) => {
+        if (item.href == window.location.pathname) {
+          this.group = index;
+        }
+      });
+    },
   },
 };
 </script>

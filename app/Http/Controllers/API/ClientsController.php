@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Lot;
 
+
 class ClientsController extends Controller
 {
     public function index()
@@ -17,6 +18,8 @@ class ClientsController extends Controller
         $clients = Client::select('id', 'name')->get();
         return response()->json($clients);
     }
+
+
 
     public function lots($id)
     {

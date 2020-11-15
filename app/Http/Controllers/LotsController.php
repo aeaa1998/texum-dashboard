@@ -9,7 +9,7 @@ use App\Models\Package;
 class LotsController extends Controller
 {
     public function index() {
-        $lots = Lot::all();
+        $lots = Lot::with('client')->get();
         //return response()->json($lots);
         $lots = $lots->map(function($lot){
             $createdAt = $lot->created_at;

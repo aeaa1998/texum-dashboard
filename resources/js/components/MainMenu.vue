@@ -10,10 +10,18 @@
       >
         <a :href="menuOption.href">
           <v-card shaped raised height="350">
-            <v-img height="100%" :src="menuOption.img" class="position-relative pt-2 pb-2">
+            <v-img
+              height="100%"
+              :src="menuOption.img"
+              class="position-relative pt-2 pb-2"
+            >
               <div class="h-35 grey lighten-1 fixed-bottom-absolute">
-                <h1 class="white--text text-center mt-1">{{menuOption.title}}</h1>
-                <h5 class="white--text text-center mt-5 pl-5 pr-5">{{menuOption.label}}</h5>
+                <h1 class="white--text text-center mt-1">
+                  {{ menuOption.title }}
+                </h1>
+                <h5 class="white--text text-center mt-5 pl-5 pr-5">
+                  {{ menuOption.label }}
+                </h5>
               </div>
             </v-img>
           </v-card>
