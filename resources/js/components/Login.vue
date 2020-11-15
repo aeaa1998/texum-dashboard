@@ -1,5 +1,5 @@
 <template>
-  <div class="vh-100 tikal-wallpaper">
+  <div class="mvh-100 tikal-wallpaper">
     <v-alert
       id="invalid-alert"
       class="w-50 position-relative s-alert"
@@ -115,3 +115,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.mvh-100 {
+  min-height: 100vh;
+}
+</style>

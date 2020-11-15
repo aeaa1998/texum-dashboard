@@ -8,7 +8,7 @@
         :key="menuOption.title"
         class="pointer"
       >
-        <a :href="menuOption.href">
+        <a :id="menuOption.href" :href="menuOption.href">
           <v-card shaped raised height="350">
             <v-img
               height="100%"
