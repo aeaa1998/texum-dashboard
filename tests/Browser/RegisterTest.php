@@ -28,7 +28,8 @@ class RegisterTest extends DuskTestCase
      *
      * @return void
      */
-    public function setUp(): void{
+    public function setUp(): void
+    {
         parent::setUp();
         Schema::disableForeignKeyConstraints();
         factory(Worker::class)->create();
