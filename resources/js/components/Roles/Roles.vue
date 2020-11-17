@@ -132,7 +132,6 @@ export default {
   }),
   beforeMount() {
     this.roles = this.payload;
-    console.log(this.roles);
   },
   methods: {
     updateRole(roleId, menuId, on) {

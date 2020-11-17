@@ -32,6 +32,8 @@
                       >
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
+                            readonly
+                            clearable
                             v-model="computedDateFrom"
                             label="Fecha de inicio"
                             v-bind="attrs"
@@ -39,8 +41,6 @@
                           ></v-text-field>
                         </template>
                         <v-date-picker
-                          readonly
-                          clearable
                           v-model="searchModel.createdFrom"
                           no-title
                           @input="menus.from = false"

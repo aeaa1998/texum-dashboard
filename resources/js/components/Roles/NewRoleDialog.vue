@@ -5,7 +5,7 @@
         <v-btn icon dark @click="closeModal">
           <v-icon>mdi-close</v-icon>
         </v-btn>
-        <v-toolbar-title>Crear solicitud</v-toolbar-title>
+        <v-toolbar-title>Crear Rol</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
           <v-btn dark text @click="create" :disabled="!validForm">Crear</v-btn>

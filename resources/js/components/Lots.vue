@@ -18,6 +18,16 @@
           <template v-slot:item.is_delivered="{ item }">
             {{ item.is_delivered == 1 ? "Si" : "No" }}
           </template>
+          <template v-slot:item.actions="{ item }">
+            <v-btn
+              v-if="item.is_delivered == 0"
+              icon
+              @click="acceptWorker(item, true)"
+            >
+              <v-icon color="green">mdi-check</v-icon>
+            </v-btn>
+            <div v-else>No hay acciones para este lote</div>
+          </template>
           <!-- hide-default-footer agregar con el pagination -->
         </v-data-table>
       </v-card>
@@ -35,7 +45,7 @@ export default {
       { align: "center", text: "Cliente", value: "client.name" },
       { align: "center", text: "Entregado", value: "is_delivered" },
       { align: "center", text: "Creado", value: "create_date" },
-      // { align: "center", text: "Acciones" },
+      { align: "center", text: "Acciones", value: "actions" },
     ],
     lotes: [],
     search: "",

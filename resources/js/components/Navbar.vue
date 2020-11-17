@@ -119,7 +119,7 @@ export default {
     ],
     accountItems: [
       { title: "Perfil de usuario", action: "/profile", dusk: "profile" },
-      { title: "Ajustes", action: "#", dusk: "ajustes" },
+      // { title: "Ajustes", action: "#", dusk: "ajustes" },
       { title: "Cerrar sesión", action: "/logout", dusk: "logout" },
     ],
   }),
